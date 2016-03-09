@@ -4,6 +4,11 @@ parameters:
 #    parameter_name: value
 
 services:
+    upload_listener:
+        class: AppBundle\Event\UploadListener
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

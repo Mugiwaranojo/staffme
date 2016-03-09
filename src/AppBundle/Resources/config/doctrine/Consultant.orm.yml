@@ -1,0 +1,158 @@
+AppBundle\Entity\Consultant:
+    type: entity
+    table: consultant
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        lastname:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        firstname:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        isu:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+        recruitement:
+            type: date
+            nullable: false
+        separation:
+            type: date
+            nullable: true
+        functionTitle:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: function_title
+        skillsLevel:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: skills_level
+        manager:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        phone:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        adresse:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        mainTag:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: main_tag
+        technicalTag:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: technical_tag
+        functionalTag:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: functional_tag
+        newTag:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: new_tag
+        wishes:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        languages:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        training:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        client:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        availability:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        missionStart:
+            type: date
+            nullable: true
+            column: mission_start
+        missionEnd:
+            type: date
+            nullable: true
+            column: mission_end
+        missionExtension:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: mission_extension
+        updated:
+            type: datetime
+            nullable: true
+        created:
+            type: datetime
+            nullable: true
+            options:
+                default: CURRENT_TIMESTAMP
+    repositoryClass: AppBundle\Repositories\ConsultantRepository
+    lifecycleCallbacks: {  }

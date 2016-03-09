@@ -1,3 +1,12 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+oneup_uploader:
+    resource: .
+    type: uploader
+
+consultants:
+    type:     rest
+    resource: AppBundle\Controller\ConsultantApiController
+    prefix:   api/
