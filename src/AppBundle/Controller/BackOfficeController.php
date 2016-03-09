@@ -14,6 +14,6 @@ class BackOfficeController extends Controller
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('backoffice/index.html.twig');
+        return $this->render('AppBundle:backoffice:index.html.twig');
     }
 }
