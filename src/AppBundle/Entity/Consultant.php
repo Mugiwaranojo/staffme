@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Consultant
  *
  * @ORM\Table(name="consultant")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repositories\ConsultantRepository")
  */
 class Consultant
 {
@@ -129,6 +129,13 @@ class Consultant
     /**
      * @var string
      *
+     * @ORM\Column(name="activity_area", type="text", length=65535, nullable=true)
+     */
+    private $activityArea;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="wishes", type="text", length=65535, nullable=true)
      */
     private $wishes;
@@ -194,7 +201,7 @@ class Consultant
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
      */
-    private $created;
+    private $created = 'CURRENT_TIMESTAMP';
 
 
 
@@ -207,7 +214,7 @@ class Consultant
     {
         return $this->id;
     }
-
+	
 	/**
      * Set id
      *
@@ -221,7 +228,7 @@ class Consultant
 
         return $this;
     }
-	
+
     /**
      * Set lastname
      *
@@ -580,6 +587,30 @@ class Consultant
     public function getNewTag()
     {
         return $this->newTag;
+    }
+
+    /**
+     * Set activityArea
+     *
+     * @param string $activityArea
+     *
+     * @return Consultant
+     */
+    public function setActivityArea($activityArea)
+    {
+        $this->activityArea = $activityArea;
+
+        return $this;
+    }
+
+    /**
+     * Get activityArea
+     *
+     * @return string
+     */
+    public function getActivityArea()
+    {
+        return $this->activityArea;
     }
 
     /**

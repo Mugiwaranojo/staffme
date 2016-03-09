@@ -101,6 +101,13 @@ AppBundle\Entity\Consultant:
             options:
                 fixed: false
             column: new_tag
+        activityArea:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: activity_area
         wishes:
             type: text
             nullable: true

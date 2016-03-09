@@ -64,7 +64,7 @@ class UploadListener
 				}
 				$num = count($data);
 				$dataReturn[$row]= array();
-				for ($c=0; $c <= 27; $c++) {
+				for ($c=0; $c < $num && $num>=27; $c++) {
 					$dataReturn[$row][$c]= $data[$c];
 				}
 				$row++;
@@ -75,7 +75,7 @@ class UploadListener
 	}
 	
 	private function saveConsultantsCSVDatas($datas){
-		for($i=1; $i < count($datas); $i++){
+		for($i=1; $i < count($datas) && count($datas)>=27; $i++){
 			$consultant= $this->datasToConsultant($datas[$i]);
 			if(!$this->om->getRepository('AppBundle:Consultant')->find(intval($datas[$i][3]))){
 				$this->om->persist($consultant);
@@ -110,13 +110,14 @@ class UploadListener
 		$consultant->setFunctionalTag($data[16]);
 		$consultant->setNewTag($data[17]);
 		$consultant->setWishes($data[18]);
+		$consultant->setActivityArea($data[21]);
 		$consultant->setlanguages($data[11]);
 		$consultant->setTraining($data[19]);
 		$consultant->setClient($data[8]);
 		$consultant->setAvailability($data[23]);
-		$consultant->setMissionStart($this->convertDateTime($data[25]));
-		$consultant->setMissionEnd($this->convertDateTime($data[26]));
-		$consultant->setMissionExtension(intval($data[27]));
+		$consultant->setMissionStart($this->convertDateTime($data[24]));
+		$consultant->setMissionEnd($this->convertDateTime($data[25]));
+		$consultant->setMissionExtension(intval($data[26]));
 		$consultant->setUpdated(new \DateTime("now"));
 		return  $consultant;
 	}
