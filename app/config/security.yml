@@ -33,5 +33,5 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/search, roles: ROLE_ADMIN }
         - { path: ^/api, roles: ROLE_ADMIN }
-       

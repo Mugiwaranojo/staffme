@@ -50,17 +50,15 @@
 					progress + '%'
 				);
 			}
-		});
-	}).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+		}).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');;
+	});
 	</script>
 {% endblock %}
 
 {% block stylesheets %}
 	<!-- Bootstrap styles -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<!-- Generic page styles -->
-	<link rel="stylesheet" href="css/style.css">
 	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 	<link rel="stylesheet" href="css/jquery.fileupload.css">
 {% endblock %}

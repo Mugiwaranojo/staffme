@@ -14,8 +14,15 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('AppBundle:default:index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
+        return $this->render('AppBundle:default:index.html.twig');
+    }
+	
+	/**
+     * @Route("/search", name="searchpage")
+     */
+    public function searchAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('AppBundle:default:search.html.twig');
     }
 }
