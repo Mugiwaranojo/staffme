@@ -80,7 +80,7 @@ class Consultant
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=10, nullable=false)
+     * @ORM\Column(name="phone", type="string", length=12, nullable=false)
      */
     private $phone;
 
@@ -99,58 +99,58 @@ class Consultant
     private $adresse;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="main_tag", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="main_tag", type="json_array", length=65535, nullable=true)
      */
     private $mainTag;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="technical_tag", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="technical_tag", type="json_array", length=65535, nullable=true)
      */
     private $technicalTag;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="functional_tag", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="functional_tag", type="json_array", length=65535, nullable=true)
      */
     private $functionalTag;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="new_tag", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="new_tag", type="json_array", length=65535, nullable=true)
      */
     private $newTag;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="activity_area", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="activity_area", type="json_array", length=65535, nullable=true)
      */
     private $activityArea;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="wishes", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="wishes", type="json_array", length=65535, nullable=true)
      */
     private $wishes;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="languages", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="languages", type="json_array", length=65535, nullable=true)
      */
     private $languages;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="training", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="training", type="json_array", length=65535, nullable=true)
      */
     private $training;
 
@@ -214,8 +214,8 @@ class Consultant
     {
         return $this->id;
     }
-	
-	/**
+
+    /**
      * Set id
      *
      * @param integer $id
@@ -496,7 +496,7 @@ class Consultant
     /**
      * Set mainTag
      *
-     * @param string $mainTag
+     * @param array $mainTag
      *
      * @return Consultant
      */
@@ -510,7 +510,7 @@ class Consultant
     /**
      * Get mainTag
      *
-     * @return string
+     * @return array
      */
     public function getMainTag()
     {
@@ -520,7 +520,7 @@ class Consultant
     /**
      * Set technicalTag
      *
-     * @param string $technicalTag
+     * @param array $technicalTag
      *
      * @return Consultant
      */
@@ -534,7 +534,7 @@ class Consultant
     /**
      * Get technicalTag
      *
-     * @return string
+     * @return array
      */
     public function getTechnicalTag()
     {
@@ -544,7 +544,7 @@ class Consultant
     /**
      * Set functionalTag
      *
-     * @param string $functionalTag
+     * @param array $functionalTag
      *
      * @return Consultant
      */
@@ -558,7 +558,7 @@ class Consultant
     /**
      * Get functionalTag
      *
-     * @return string
+     * @return array
      */
     public function getFunctionalTag()
     {
@@ -568,7 +568,7 @@ class Consultant
     /**
      * Set newTag
      *
-     * @param string $newTag
+     * @param array $newTag
      *
      * @return Consultant
      */
@@ -582,7 +582,7 @@ class Consultant
     /**
      * Get newTag
      *
-     * @return string
+     * @return array
      */
     public function getNewTag()
     {
@@ -592,7 +592,7 @@ class Consultant
     /**
      * Set activityArea
      *
-     * @param string $activityArea
+     * @param array $activityArea
      *
      * @return Consultant
      */
@@ -606,7 +606,7 @@ class Consultant
     /**
      * Get activityArea
      *
-     * @return string
+     * @return array
      */
     public function getActivityArea()
     {
@@ -616,7 +616,7 @@ class Consultant
     /**
      * Set wishes
      *
-     * @param string $wishes
+     * @param array $wishes
      *
      * @return Consultant
      */
@@ -630,7 +630,7 @@ class Consultant
     /**
      * Get wishes
      *
-     * @return string
+     * @return array
      */
     public function getWishes()
     {
@@ -640,7 +640,7 @@ class Consultant
     /**
      * Set languages
      *
-     * @param string $languages
+     * @param array $languages
      *
      * @return Consultant
      */
@@ -654,7 +654,7 @@ class Consultant
     /**
      * Get languages
      *
-     * @return string
+     * @return array
      */
     public function getLanguages()
     {
@@ -664,7 +664,7 @@ class Consultant
     /**
      * Set training
      *
-     * @param string $training
+     * @param array $training
      *
      * @return Consultant
      */
@@ -678,7 +678,7 @@ class Consultant
     /**
      * Get training
      *
-     * @return string
+     * @return array
      */
     public function getTraining()
     {

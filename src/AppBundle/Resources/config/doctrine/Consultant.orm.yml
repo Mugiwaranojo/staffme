@@ -58,7 +58,7 @@ AppBundle\Entity\Consultant:
         phone:
             type: string
             nullable: false
-            length: 10
+            length: 12
             options:
                 fixed: false
         email:
@@ -74,54 +74,54 @@ AppBundle\Entity\Consultant:
             options:
                 fixed: false
         mainTag:
-            type: text
-            nullable: false
+            type: json_array
+            nullable: true
             length: 65535
             options:
                 fixed: false
             column: main_tag
         technicalTag:
-            type: text
-            nullable: false
+            type: json_array
+            nullable: true
             length: 65535
             options:
                 fixed: false
             column: technical_tag
         functionalTag:
-            type: text
-            nullable: false
+            type: json_array
+            nullable: true
             length: 65535
             options:
                 fixed: false
             column: functional_tag
         newTag:
-            type: text
-            nullable: false
+            type: json_array
+            nullable: true
             length: 65535
             options:
                 fixed: false
             column: new_tag
         activityArea:
-            type: text
+            type: json_array
             nullable: true
             length: 65535
             options:
                 fixed: false
             column: activity_area
         wishes:
-            type: text
+            type: json_array
             nullable: true
             length: 65535
             options:
                 fixed: false
         languages:
-            type: text
+            type: json_array
             nullable: true
             length: 65535
             options:
                 fixed: false
         training:
-            type: text
+            type: json_array
             nullable: true
             length: 65535
             options:
