@@ -167,3 +167,26 @@ input.ui-slider-input {
             left:602px;
     }
 }
+
+/*
+/////////////Result page
+*/
+#nav_consultant{
+    display: none;
+}
+#nav_consultant span{
+    margin-left: -16px;
+    margin-right: 8px;
+}
+#result_list{
+    margin-top: 15px;
+}
+#result_list button{
+    width: 100%;
+    text-align: left;
+}
+#result_details{
+    display: none;
+}
+
+
