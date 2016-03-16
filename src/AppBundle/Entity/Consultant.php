@@ -162,9 +162,9 @@ class Consultant
     private $client;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="availability", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="availability", type="json_array", length=65535, nullable=false)
      */
     private $availability;
 
@@ -712,7 +712,7 @@ class Consultant
     /**
      * Set availability
      *
-     * @param string $availability
+     * @param array $availability
      *
      * @return Consultant
      */
@@ -726,7 +726,7 @@ class Consultant
     /**
      * Get availability
      *
-     * @return string
+     * @return array
      */
     public function getAvailability()
     {

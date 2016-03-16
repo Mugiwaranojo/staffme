@@ -171,22 +171,134 @@ input.ui-slider-input {
 /*
 /////////////Result page
 */
+#result_top button{
+    font-size: 14px;
+}
 #nav_consultant{
     display: none;
 }
-#nav_consultant span{
-    margin-left: -16px;
-    margin-right: 8px;
+#nav_consultant a{
+    padding-left: 10px;
+    text-decoration: none;
 }
+#nav_consultant span{
+    margin: 0px
+}
+
 #result_list{
     margin-top: 15px;
 }
-#result_list button{
-    width: 100%;
+#result_list div{
     text-align: left;
 }
-#result_details{
-    display: none;
+#result_list div span{
+    overflow: hidden;
+    text-transform: uppercase;
 }
 
+#result_list div span + span{
+    padding-left: 8px;
+}
+#result_list div span + span + span{
+    padding-left: 0px;
+    margin-left: -20px;
+}
+#result_list div span+span+span+span{
+    margin-left: 14px;
+}
+.status_availability{
+    position: absolute;
+    width: 18px;
+    height: 20px;
+    border-radius: 10px
+}
+.availability_1, .availability_4{
+    background: red !important;
+}
+.availability_2{
+    background: #000 !important;
+}
+.availability_3{
+    background: greenyellow !important;
+}
+.availability_5{
+    background: #000 !important;
+}
 
+#result_details {
+  margin: auto !important;
+  display: block;
+  height: 565px;
+  position: relative;
+  list-style-type: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+} 
+.consultants_details {
+  display: none;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  top: 12px;
+  position: absolute;
+  width: 100%;
+  cursor: hand;
+  padding-bottom: 38px;
+}
+
+.consultants_details div{
+    text-transform: uppercase;
+    background-color: #e8e8e8;
+    color:#000;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.consultants_details div span{
+    color: #999;
+}
+.consultants_details > div{
+   padding: 5px;
+   margin: 8px 0px;
+}
+
+.consultants_details > div:first-child{                                           
+    margin-top: 0px;
+}
+.consultants_details .status_availability{
+    right: 8px;
+}
+
+.consultants_details_bottom{
+    display:none;
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    padding:0px !important;
+}
+
+.consultants_details_bottom a{
+    font-size: 2.2em;
+    background-color: #0066FF !important;
+    color: #FFF !important;
+}
+
+.rotate-left {
+  transform: rotate(30deg) scale(0.8);
+  transition: 1s;
+  margin-left: 400px;
+  cursor: e-resize;
+  opacity: 0;
+}
+.rotate-right {
+  transform: rotate(-30deg) scale(0.8);
+  transition: 1s;
+  opacity: 0;
+  margin-left: -400px;
+  cursor: w-resize;
+}

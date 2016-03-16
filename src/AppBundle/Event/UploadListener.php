@@ -118,7 +118,7 @@ class UploadListener
         $consultant->setLanguages($this->convertLanguagesToJSON($data[11]));
         $consultant->setTraining($this->convertTagToJSON($data[19]));
         $consultant->setClient($data[8]);
-        $consultant->setAvailability($data[23]);
+        $consultant->setAvailability($this->convertAvailabilityToJSON($data[23]));
         $consultant->setMissionStart($this->convertDateTime($data[24]));
         $consultant->setMissionEnd($this->convertDateTime($data[25]));
         $consultant->setMissionExtension(intval($data[26]));
@@ -139,6 +139,24 @@ class UploadListener
         }
         return array_map("trim", explode(",", $value));
     }
+    
+    private function convertAvailabilityToJSON($value){
+        if(empty($value)){
+            return null;
+        }
+        if(preg_match('/\s*(?P<value>\d+)\s*\(*(?P<complement>[a-zA-Z0-9\/\s]+)*\)*/', $value, $matches)){
+            if(isset($matches["complement"])){
+                return array("value"=> intval($matches["value"]),
+                              "complement"=>$matches["complement"]);
+            }else{
+                return array("value"=>intval($matches["value"]),
+                              "complement"=>null);
+            }
+        }else{
+            return null;
+        }
+    }
+    
     
     private function convertLanguagesToJSON($value){
         $result= array();

@@ -133,7 +133,7 @@ AppBundle\Entity\Consultant:
             options:
                 fixed: false
         availability:
-            type: text
+            type: json_array
             nullable: false
             length: 65535
             options:
