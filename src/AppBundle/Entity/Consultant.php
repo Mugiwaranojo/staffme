@@ -852,4 +852,18 @@ class Consultant
     {
         return $this->created;
     }
+    
+    public function getWeeksRemaining(){
+        if(!empty($this->getMissionEnd())){
+            $interval = $this->getMissionEnd()->diff(new \DateTime("now"));
+            return intval($interval->days / 7);
+        }else if($this->getAvailability()["value"]==3){
+            return -1;
+        }else if($this->getAvailability()["value"]==4){
+            return 0;
+        }else{
+            return 10000;
+        }
+    }
+            
 }

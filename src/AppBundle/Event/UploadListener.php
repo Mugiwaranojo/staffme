@@ -123,6 +123,7 @@ class UploadListener
         $consultant->setMissionEnd($this->convertDateTime($data[25]));
         $consultant->setMissionExtension(intval($data[26]));
         $consultant->setUpdated(new \DateTime("now"));
+        
     }
 
     private function convertDateTime($value){

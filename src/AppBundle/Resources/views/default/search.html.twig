@@ -1,52 +1,88 @@
 {% extends 'AppBundle:base.html.twig' %}
 
 {% block body %}
-    <div data-role="header" id="topbar">
-        <a href="#" data-icon="bars"></a>
-        <h1>Staff-ME</h1>
-        <a href="/" data-icon="power"></a>
-    </div> 
-    <div role="main" class="ui-content">
-        <form id='formSearch' method="GET" action="/result" data-transition="slide">
-            <div class="ui-field-contain">
-                    <label for="inputKeywords">KEYWORDS(separate by comma)</label>
-                    <input name="inputKeywords" id="inputKeywords" placeholder="example : Java, AGILE, ..." value="" type="text">
+    <div data-role="page" id="searchpage">
+        <div data-role="header" class="topbar">
+            <a href="#" data-icon="bars"></a>
+            <h1>Staff-Me</h1>
+            <a href="/" data-icon="power"></a>
+        </div> 
+        <div data-role="main" class="ui-content">
+            
+            <form id='formSearch' method="GET" action="/result" data-transition="slide" data-dom-cache="false">
+                <div class="ui-field-contain">
+                        <label for="inputKeywords">KEYWORDS(separate by comma)</label>
+                        <input name="inputKeywords" id="inputKeywords" placeholder="example : Java, AGILE, ..." value="" type="text">
+                </div>
+                <div class="ui-field-contain">
+                        <label for="inputFunctions">FUNCTION(separate by comma)</label>
+                        <input name="inputFunctions" id="inputFunctions" placeholder="example : Developpeur, Chef de projet, ..." value="" type="text">
+                </div>
+                <div data-role="rangeslider" data-track-theme="a" data-theme="b">
+                  <label for="rangeAvailability-a">AVAILABILITY</label>
+                  <input name="rangeAvailability-a" id="rangeAvailability-a" min="0" max="8" value="0" type="range" class="findRange" />
+                  <label for="rangeAvailability-b">AVAILABILITY</label>
+                  <input name="rangeAvailability-b" id="rangeAvailability-b" min="0" max="8" value="4" type="range" class="findRange"/>
+                </div>
+                <div id="availabilityValues">
+                        <div>Asap</div>
+                        <div>1 week</div>
+                        <div>2 weeks</div>
+                        <div>3 weeks</div>
+                        <div>4 weeks</div>
+                        <div>5 weeks</div>
+                        <div>6 weeks</div>
+                        <div>7 weeks</div>
+                        <div>8 weeks</div>
+                </div>
+                <button id="buttonValidSearch">SEARCH</button>
+            </form>
+            
+            <div id="result_top" class="ui-grid-c">
+                <button class="ui-block-a" id="buttonSearchPage"><i class="fa fa-search"></i> SEARCH</button>
+                <button class="ui-block-b"><i class="fa fa-sort"></i> SORT</button>
+                <button class="ui-block-c" id="buttonDetails" data-value="details"><i class="fa fa-clone"></i> DETAILS</button>
+                <div id="nav_consultant" class="ui-block-d ui-grid-b">
+                    <a class="ui-block-a" href="#"> < </a>
+                    <span class="ui-block-b"> 1/12 </span>
+                    <a class="ui-block-c" href="#"> > </a>
+                </div>
             </div>
-            <div class="ui-field-contain">
-                    <label for="inputFunctions">FUNCTION(separate by comma)</label>
-                    <input name="inputFunctions" id="inputFunctions" placeholder="example : Developpeur, Chef de projet, ..." value="" type="text">
+            
+            <div id="result_list">    
             </div>
-            <div data-role="rangeslider" data-track-theme="a" data-theme="b">
-              <label for="rangeAvailability-a">AVAILABILITY</label>
-              <input name="rangeAvailability-a" id="rangeAvailability-a" min="0" max="8" value="0" type="range" class="findRange" />
-              <label for="rangeAvailability-b">AVAILABILITY</label>
-              <input name="rangeAvailability-b" id="rangeAvailability-b" min="0" max="8" value="4" type="range" class="findRange"/>
+            
+            <div id="result_details">    
             </div>
-            <div id="availabilityValues">
-                    <div>Asap</div>
-                    <div>1 week</div>
-                    <div>2 weeks</div>
-                    <div>3 weeks</div>
-                    <div>4 weeks</div>
-                    <div>5 weeks</div>
-                    <div>6 weeks</div>
-                    <div>7 weeks</div>
-                    <div>8 weeks</div>
-            </div>
-            <button>SEARCH</button>
-        </form>
+        
+        </div>
+        <div data-role="footer">
+        </div>
+        <script type="text/javascript">
+            $(document).on('pageinit', function() {
+                    $( ".findRange" ).unbind( "change");
+                    $( ".findRange" ).bind( "change", function(event, ui) {
+                            var listValues= $("#availabilityValues div");
+                            $("#availabilityValues div").hide();
+                            $(listValues.get($("#rangeAvailability-b")[0].valueAsNumber)).show();
+                            $(listValues.get($("#rangeAvailability-a")[0].valueAsNumber)).show();
+                    });
+                    
+                    $("#buttonValidSearch").unbind("click");
+                    $("#buttonValidSearch").on("click", function(){
+                        updateConsultants();
+                        return false; 
+                    });
+                    
+                    $("#buttonSearchPage").unbind("click");
+                    $("#buttonSearchPage").on("click", function(){
+                        $("#result_top").hide();
+                        $("#result_details").hide();
+                        $("#result_list").hide();
+                        $("#formSearch").slideDown();
+                    });
+                    
+            });
+        </script>
     </div>
-    <div data-role="footer">
-    </div>
-    <script type="text/javascript">
-        $(document).on('pageinit', function() {
-                $( ".findRange" ).bind( "change", function(event, ui) {
-                        var listValues= $("#availabilityValues div");
-                        $("#availabilityValues div").hide();
-                        $(listValues.get($("#rangeAvailability-b")[0].valueAsNumber)).show();
-                        $(listValues.get($("#rangeAvailability-a")[0].valueAsNumber)).show();
-                });
-        });
-    </script>
-
 {% endblock %}

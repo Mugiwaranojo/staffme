@@ -1,6 +1,6 @@
 function $_GET(param) {
 	var vars = {};
-	window.location.href.replace( location.hash, '' ).replace( 
+        window.location.href.replace( location.hash, '' ).replace( 
 		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
 		function( m, key, value ) { // callback
 			vars[key] = value !== undefined ? value : '';

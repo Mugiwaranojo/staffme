@@ -13,7 +13,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
         return $this->render('AppBundle:default:index.html.twig');
     }
 	
@@ -22,16 +21,6 @@ class DefaultController extends Controller
      */
     public function searchAction(Request $request)
     {
-        // replace this example code with whatever you need
         return $this->render('AppBundle:default:search.html.twig');
-    }
-    
-    /**
-     * @Route("/result", name="resultpage")
-     */
-    public function resultAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('AppBundle:default:result.html.twig');
     }
 }

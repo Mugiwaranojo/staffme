@@ -1,44 +1,30 @@
 var current_consultant=1;
 var consultantsArray;
-$(document).on('pageinit', function() {
+
+function updateConsultants(){
+    $(".ui-loader").show();
     $.ajax({
-        url: "/api/consultants",
+        url: "/api/consultants"+document.location.search,
         type: "get", //send it through get method
-        data:$_GET(false),
+        data:  $("#formSearch").serialize(),
         success: function(response) {
-            console.log(response);
             consultantsArray= response;
+            current_consultant=1;
             updateConsultantsList(consultantsArray);
             updateConsultantsDetails(consultantsArray);
             init_swap();
             initListButton();
-            $("#result_details").hide();
+            $("#nav_consultant").hide();
+            $(".ui-loader").hide();
+            $("#formSearch").slideUp();
+            $("#result_top").slideDown();
+            $("#result_list").slideDown();
         },
         error: function(xhr) {
           //Do Something to handle error
         }
     });
-      
-    $("#buttonDetails").on("click", function(){
-        if($(this).data('value')==="details"){
-            $("#result_list").hide();
-            $("#result_details").show();
-            $("#nav_consultant").show();
-            $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
-            $('.consultants_details:nth-child('+current_consultant+')').show();
-            $(".consultants_details_bottom").show();
-            $(this).html("<i class='fa fa-list'></i> LIST");
-            $(this).data('value',"list");
-        }else{
-            $("#nav_consultant").hide();
-            $("#result_details").hide();
-            $(".consultants_details_bottom").hide();
-            $("#result_list").show();
-            $(this).html("<i class='fa fa-clone'></i> DETAILS");
-            $(this).data('value',"details");
-        }
-    });
-});
+}
 
 function init_swap(){
     $(".consultants_details").on("swiperight",function(){
@@ -64,10 +50,10 @@ function init_swap(){
         }
         $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });
-    
+    $("#nav_consultant .ui-block-a").unbind('click');
     $("#nav_consultant .ui-block-a").on("click", function(){
         $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-left').delay(700).fadeOut(1);
-        if(current_consultant===1){
+        if(current_consultant==1){
             current_consultant= consultantsArray.length;
         }else{
             current_consultant--;
@@ -75,10 +61,10 @@ function init_swap(){
         $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
         $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });
-    
+    $("#nav_consultant .ui-block-c").unbind('click');
     $("#nav_consultant .ui-block-c").on("click", function(){
         $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-right').delay(700).fadeOut(1);
-        if(current_consultant===consultantsArray.length){
+        if(current_consultant==consultantsArray.length){
             current_consultant=1;
         }else{
             current_consultant++;
@@ -86,6 +72,7 @@ function init_swap(){
         $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
         $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });
+    $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
 }
 
 function initListButton(){
@@ -98,7 +85,28 @@ function initListButton(){
         $("#result_details").show();
         $("#nav_consultant").show();
         $(".consultants_details_bottom").show();
-        $("#buttonDetails").html("LIST");
+        $("#buttonDetails").html("<i class='fa fa-list'></i> LIST");
+        $("#buttonDetails").data('value',"list");
+    });
+    $("#buttonDetails").unbind('click');
+    $("#buttonDetails").on("click", function(){
+        if($(this).data('value')==="details"){
+            $("#result_list").hide();
+            $("#result_details").show();
+            $("#nav_consultant").show();
+            $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
+            $('.consultants_details:nth-child('+current_consultant+')').show();
+            $(".consultants_details_bottom").show();
+            $(this).html("<i class='fa fa-list'></i> LIST");
+            $(this).data('value',"list");
+        }else{
+            $("#nav_consultant").hide();
+            $("#result_details").hide();
+            $(".consultants_details_bottom").hide();
+            $("#result_list").show();
+            $(this).html("<i class='fa fa-clone'></i> DETAILS");
+            $(this).data('value',"details");
+        }
     });
 }
 
@@ -110,9 +118,8 @@ function updateConsultantsList(consultants){
         var number=i+1;
         var consultant="<div class='ui-grid-b ui-btn ui-corner-all' data-consultant-number='"+number+"'>";
         consultant+="<span class='ui-block-a'>"+consultants[i].firstname+" "+consultants[i].lastname+"</span>";
-        consultant+="<span class='ui-block-b'>"+consultants[i].isu+"</span>";
-        consultant+="<span class='ui-block-c'>"+consultants[i].function_title+"</span>";
-        consultant+="<span class='status_availability availability_"+consultants[i].availability.value+"'></span>";
+        consultant+="<span class='ui-block-b'>"+consultants[i].function_title+"</span>";
+        consultant+="<span class='ui-block-c status_availability availability_"+getAvailabilityStatus(consultants[i])+"'></span>";
         consultant+="</div>\n";
         htmlLists+=consultant;
     }
@@ -124,7 +131,7 @@ function updateConsultantsDetails(consultants){
     for(var i=0;i<consultants.length;i++){
         var consultant="<div class='consultants_details'>";
                 consultant+="<div class='consultants_details_main'>";
-                    consultant+="<span class='status_availability availability_"+consultants[i].availability.value+"'></span>";
+                    consultant+="<span class='status_availability availability_"+getAvailabilityStatus(consultants[i])+"'></span>";
                     consultant+="<div><i class='fa fa-user'></i> "+consultants[i].firstname+" "+consultants[i].lastname+"</div>";
                     consultant+="<div><i class='fa fa-suitcase'></i> "+consultants[i].function_title+"</div>";
                     consultant+="<div><i class='fa fa-signal'></i> "+consultants[i].skills_level+"</div>";
@@ -218,7 +225,7 @@ function displayStatus(objConsultant){
             }
             break;
         case 4:
-            statusString+="PART TIME JOB";
+            statusString+="PART TIME JOB "+"("+objConsultant.availability.complement+")";
             break;
         case 5:
             statusString+="RESIGNING";
@@ -244,4 +251,21 @@ function displayDate(dateValue){
    var mm = (dateValue.getMonth()+1).toString(); // getMonth() is zero-based
    var dd  = dateValue.getDate().toString();
    return  (dd[1]?dd:"0"+dd[0]) +"/"+ (mm[1]?mm:"0"+mm[0])+ "/" + yyyy  ; 
+}
+
+function getAvailabilityStatus(objConsultant){
+    if((objConsultant.availability.value==1||objConsultant.availability==4)
+            &&objConsultant.mission_end){
+        if(dateDiffInWeeks(objConsultant.mission_end)<=4){
+            return 6;
+        }
+    }
+    return objConsultant.availability.value;
+    
+}
+
+function dateDiffInWeeks(dateString){
+    var d1 = new Date();
+    var d2 = new Date(dateString);
+    return parseInt(((d2.getTime()-d1.getTime())/(24*3600*1000))/7);
 }
