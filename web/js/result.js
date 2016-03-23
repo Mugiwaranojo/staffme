@@ -8,15 +8,22 @@ function updateConsultants(){
         type: "get", //send it through get method
         data:  $("#formSearch").serialize(),
         success: function(response) {
-            consultantsArray= response;
-            current_consultant=1;
-            updateConsultantsList(consultantsArray);
-            updateConsultantsDetails(consultantsArray);
-            init_swap();
-            initListButton();
+            //console.log(response);
+            if(response.length===0){
+                $("#result_list").html("<p>No result</p>")
+                $("#buttonDetails").unbind('click');
+            }else{
+                consultantsArray= response;
+                current_consultant=1;
+                updateConsultantsList(consultantsArray);
+                updateConsultantsDetails(consultantsArray);
+                init_swap();
+                initListButton();
+            }
             $("#nav_consultant").hide();
             $(".ui-loader").hide();
             $("#formSearch").slideUp();
+            $("#searchTop").slideDown();
             $("#result_top").slideDown();
             $("#result_list").slideDown();
         },
@@ -146,15 +153,13 @@ function updateConsultantsDetails(consultants){
                     consultant+="<span><i class='fa fa-tag'></i> MAIN TAG</span>: ";
                     consultant+=displayTags(consultants[i].main_tag);
                 consultant+="</div>\n";
-                consultant+="<div class='ui-grid-a'>";
-                    consultant+="<div class='consultants_details_functional_tag ui-block-a'>";
-                        consultant+="<span><i class='fa fa-pencil'></i> FUNCTIONAL TAG</span>: ";
-                        consultant+=displayTags(consultants[i].functional_tag);
-                    consultant+="</div>\n";
-                    consultant+="<div class='consultants_details_technical_tag ui-block-b'>";
-                        consultant+="<span><i class='fa fa-wrench'></i> TECHNICAL TAG</span>: ";
-                        consultant+=displayTags(consultants[i].technical_tag);
-                    consultant+="</div>\n";
+                consultant+="<div class='consultants_details_functional_tag'>";
+                    consultant+="<span><i class='fa fa-pencil'></i> FUNCTIONAL TAG</span>: ";
+                    consultant+=displayTags(consultants[i].functional_tag);
+                consultant+="</div>\n";
+                consultant+="<div class='consultants_details_technical_tag'>";
+                    consultant+="<span><i class='fa fa-wrench'></i> TECHNICAL TAG</span>: ";
+                    consultant+=displayTags(consultants[i].technical_tag);
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_new_tag'>";
                     consultant+="<span><i class='fa fa-bookmark-o'></i> NEW TAG</span>: ";
@@ -250,7 +255,7 @@ function displayDate(dateValue){
    var yyyy = dateValue.getFullYear().toString();
    var mm = (dateValue.getMonth()+1).toString(); // getMonth() is zero-based
    var dd  = dateValue.getDate().toString();
-   return  (dd[1]?dd:"0"+dd[0]) +"/"+ (mm[1]?mm:"0"+mm[0])+ "/" + yyyy  ; 
+   return  (dd[1]?dd+"":"0"+dd[0]) +"/"+ (mm[1]?mm+"":"0"+mm[0])+ "/" + yyyy  ; 
 }
 
 function getAvailabilityStatus(objConsultant){
@@ -259,6 +264,9 @@ function getAvailabilityStatus(objConsultant){
         if(dateDiffInWeeks(objConsultant.mission_end)<=4){
             return 6;
         }
+    }
+    if(objConsultant.availability.value==5){
+        return objConsultant.availability.value+" ui-icon-delete ui-btn-icon-notext";
     }
     return objConsultant.availability.value;
     

@@ -12,6 +12,9 @@
 /*
 ////////////Homepage
 */
+.ui-content{
+    padding: 0px;
+}
 #homepage h1,h3,h4{
 	text-align:center;
 	color:#FFF;
@@ -50,7 +53,8 @@
 
 @media only screen and (min-width : 640px) {
     #loginButton{
-        margin-top: 50px;
+        width: 30%;
+        margin: 50px auto;
     }
 }
 /*
@@ -66,6 +70,7 @@
     background-color: transparent;
 }
 
+/*
 input.ui-slider-input {
 	display:none;
 }
@@ -74,6 +79,10 @@ input.ui-slider-input {
     left: auto;
     width: 150%;
     margin-right: -60px;
+}*/
+
+.ui-field-contain{
+    border:none;
 }
 /*
 /////////////TopBar
@@ -94,78 +103,84 @@ input.ui-slider-input {
 /*
 /////////////Search page
 */
+#formSearch{
+    padding: 5px;
+};
 
-#availabilityValues div{
-	display:block;
-	position:absolute;
-	left:22px;
-    background-color: #FFF;
-    padding-left: 5px;
+#searchTop{
+  display: none;  
 }
-#availabilityValues div+div{
-	left:46px;
-	display:none;
+#rangeAvailability-a, #rangeAvailability-b, #rangeOnMissionSince-a, #rangeOnMissionSince-b{
+    display:none;
 }
-#availabilityValues div+div+div{
-	left:82px;
-}
-#availabilityValues div+div+div+div{
-	left:120px;
-}
-#availabilityValues div+div+div+div+div{
-	left:162px;
-	display:block;
-}
-#availabilityValues div+div+div+div+div+div{
-	left:202px;
-	display:none;
-}
-#availabilityValues div+div+div+div+div+div+div{
-	left:236px;
-}
-#availabilityValues div+div+div+div+div+div+div+div{
-	left:276px;
-}
-#availabilityValues div+div+div+div+div+div+div+div+div{
-	left:310px;
+.ui-rangeslider-sliders{
+    margin: 0px 15px !important;
 }
 
+#availabilityValueA, #availabilityValueB, #onMissionSinceValueA, #onMissionSinceValueB{
+    position: absolute;
+    background: #FFF;
+    border-radius: 10px;
+    padding: 0px 5px;
+    left: 10px;
+}
+#availabilityValueB{
+    left: 165px;
+}
+#onMissionSinceValueB{
+    left: 117px;
+}
 #formSearch button{
-	margin-top: 65px;
+	margin-top: 50px;
+}
+#formSearch button+button{
+	margin-top: 0px;
+}
+#buttonValidSearch, #buttonValidSearch2{
+    background-color: #0066FF;
 }
 
-@media only screen and (min-width : 640px) {
-    .ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
-        width: 120%;
-        margin-right: -60px;
-    }
-    #availabilityValues div+div{
-            left:88px;
-            display:none;
-    }
-    #availabilityValues div+div+div{
-            left:160px;
-    }
-    #availabilityValues div+div+div+div{
-            left:234px;
-    }
-    #availabilityValues div+div+div+div+div{
-            left:308px;
-            display:block;
-    }
-    #availabilityValues div+div+div+div+div+div{
-            left:382px;
-            display:none;
-    }
-    #availabilityValues div+div+div+div+div+div+div{
-            left:460px;
-    }
-    #availabilityValues div+div+div+div+div+div+div+div{
-            left:534px;
-    }
-    #availabilityValues div+div+div+div+div+div+div+div+div{
-            left:602px;
-    }
+#moreFilter{
+    display: none;
+    margin-top: 20px;
+}
+
+#moreFilter fieldset{
+    background-color: #e0e0e0;
+    margin-top: 35px;
+}
+#moreFilter fieldset+fieldset, #moreFilter fieldset+div+fieldset {
+    margin-top: 10px;
+}
+
+#moreFilter .ui-controlgroup-controls{
+    width: 100%;
+    margin-top: -12px;
+}
+#moreFilter legend{
+    font-weight: bold;
+    padding: 15px;
+}
+#moreFilter .ui-checkbox{
+    width: 33%;
+}
+#moreFilter .ui-field-contain{
+    margin-top: -10px;
+    background-color: #e0e0e0;
+}
+#moreFilter .ui-field-contain label{
+    display: inline-block;
+    width: 26%;
+    padding-left: 15px;
+    font-weight: bold;
+}
+#moreFilter .ui-field-contain div{
+    display: inline-block;
+    width: 67%;
+}
+
+#moreFilter button{
+    margin-top: 20px;
 }
 
 /*
@@ -173,37 +188,44 @@ input.ui-slider-input {
 */
 #result_top{
     display: none;
+    padding: 5px;
 }
 
 #result_top button{
     font-size: 14px;
+    padding: 2px 0px;
+    margin: 2px;
 }
 #nav_consultant{
     display: none;
+    width: 30%;
+    padding-top: 5px;
 }
 #nav_consultant a{
-    padding-left: 10px;
+    padding-left: 15px;
     text-decoration: none;
 }
 #nav_consultant span{
-    margin-left: -6px;
-    margin-right: 4px;
+    padding: 0px 5px;
 }
-
 #result_list{
     margin-top: 15px;
+}
+#result_list p{
+    text-align: center;
 }
 #result_list div{
     text-align: left;
 }
 #result_list div span{
     overflow: hidden;
+    text-overflow: ellipsis;
     text-transform: uppercase;
 }
 
 #result_list div span + span{
     margin-left: 10px;
-    width: initial;
+    width: 62%;
 }
 .status_availability{
     margin: 0px;
@@ -213,8 +235,11 @@ input.ui-slider-input {
     right: 10px;
     border-radius: 10px
 }
-.availability_1, .availability_4{
+.availability_1{
     background: red !important;
+}
+.availability_4{
+    background: #5eb5e0 !important;
 }
 .availability_2{
     background: #000 !important;
@@ -223,7 +248,8 @@ input.ui-slider-input {
     background: greenyellow !important;
 }
 .availability_5{
-    background: #000 !important;
+    background-color: #000 !important;
+    
 }
 .availability_6{
     background: orange !important;
@@ -231,8 +257,8 @@ input.ui-slider-input {
 
 #result_details {
   margin: auto !important;
-  display: block;
-  height: 565px;
+  display: none;
+  height: 448px;
   position: relative;
   list-style-type: none;
   -webkit-touch-callout: none;
@@ -242,6 +268,22 @@ input.ui-slider-input {
   -ms-user-select: none;
   user-select: none;
 } 
+
+@media only screen and (min-height : 640px) {
+    #result_details{
+        height: 520px;
+    }
+}
+@media only screen and (min-height : 660px) {
+    #result_details{
+        height: 545px;
+    }
+}
+@media only screen and (min-height : 770px) {
+    #result_details{
+        height: 650px;
+    }
+}
 .consultants_details {
   display: none;
   background: #fff;
@@ -251,7 +293,6 @@ input.ui-slider-input {
   position: absolute;
   width: 100%;
   cursor: hand;
-  padding-bottom: 38px;
 }
 
 .consultants_details div{
@@ -264,13 +305,23 @@ input.ui-slider-input {
 .consultants_details div span{
     color: #999;
 }
+
+.consultants_details div span+span, .consultants_details div i+span{
+    color: #ffcc00;
+    background: #FFF;
+    border-radius: 10px;
+    padding: 0px 3px;
+}
 .consultants_details > div{
    padding: 5px;
-   margin: 8px 0px;
+   margin: 5px 0px;
 }
 
-.consultants_details > div:first-child{                                           
+.consultants_details > div:first-child{                                         
     margin-top: 0px;
+}
+.consultants_details_id, .consultants_details > div:last-child{                                           
+    margin: 0px !important;
 }
 .consultants_details .status_availability{
     right: 8px;

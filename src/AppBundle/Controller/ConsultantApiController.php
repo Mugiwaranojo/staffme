@@ -12,6 +12,11 @@ class ConsultantApiController extends FOSRestController
     * @QueryParam(name="inputFunctions", default="")
     * @QueryParam(name="rangeAvailability-a", requirements="\d+", default="0")
     * @QueryParam(name="rangeAvailability-b", requirements="\d+", default="4")
+    * @QueryParam(name="rangeOnMissionSince-a", requirements="\d+", default="0")
+    * @QueryParam(name="rangeOnMissionSince-b", requirements="\d+", default="6")
+    * @QueryParam(name="language-choice", default="")
+    * @QueryParam(name="language-choiceChecked", default="")
+    * @QueryParam(name="exp-choice", default="")
     * @param ParamFetcher $paramFetcher 
     */
     public function getConsultantsAction(ParamFetcher $paramFetcher)

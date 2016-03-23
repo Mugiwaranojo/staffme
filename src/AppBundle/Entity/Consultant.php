@@ -865,5 +865,36 @@ class Consultant
             return 10000;
         }
     }
+    
+    public function addSearchHighlight($keywords){
+        if(!empty($keywords)){
+            foreach ($keywords as $keyword){
+                $dataFunctionTitle= str_replace(strtoupper($keyword), "<span>".strtoupper($keyword)."</span>",  strtoupper($this->getFunctionTitle()));
+                $this->setFunctionTitle($dataFunctionTitle);
+                $dataClient= str_replace(strtoupper($keyword), "<span>".strtoupper($keyword)."</span>",  strtoupper($this->getClient()));
+                $this->setClient($dataClient);
+                $dataMainTag = $this->addHighlightToField($this->getMainTag(), $keyword);
+                $this->setMainTag($dataMainTag);
+                $dataTechnicalTag = $this->addHighlightToField($this->getTechnicalTag(), $keyword);
+                $this->setTechnicalTag($dataTechnicalTag);
+                $dataFunctional = $this->addHighlightToField($this->getFunctionalTag(), $keyword);
+                $this->setFunctionalTag($dataFunctional);
+                $dataNewTag = $this->addHighlightToField($this->getNewTag(), $keyword);
+                $this->setNewTag($dataNewTag);
+                $dataActivityArea = $this->addHighlightToField($this->getActivityArea(), $keyword);
+                $this->setActivityArea($dataActivityArea);
+                $dataWishes = $this->addHighlightToField($this->getWishes(), $keyword);
+                $this->setWishes($dataWishes);
+            }
+        }
+        return $this;
+    }
+    
+    private function addHighlightToField($array, $keyword){
+        foreach ($array as $key=>$value){
+            $array[$key]= str_replace(strtoupper($keyword), "<span>".strtoupper($keyword)."</span>", strtoupper($value));
+        }
+        return $array;
+    }
             
 }

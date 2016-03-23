@@ -9,42 +9,114 @@ class ConsultantRepository extends EntityRepository
     
     public function findByAvailability($params){
         $qb = $this->createQueryBuilder("c");
-        if(!empty($params["inputKeywords"])){
-            $keywords = array_map("trim", explode(",", $params["inputKeywords"]));
-            foreach ($keywords as $key=>$keyword){
-                if($key==0){
-                    $qb->Where('UPPER(c.mainTag) LIKE :word'.$key);
-                }else{
-                     $qb->orWhere('UPPER(c.mainTag) LIKE :word'.$key);
-                }
-                $qb->orWhere('UPPER(c.technicalTag) LIKE :word'.$key)
-                   ->orWhere('UPPER(c.functionalTag) LIKE :word'.$key)
-                   ->orWhere('UPPER(c.newTag) LIKE :word'.$key)
-                   ->orWhere('UPPER(c.activityArea) LIKE :word'.$key)
-                   ->orWhere('UPPER(c.wishes) LIKE :word'.$key)
-                   ->orWhere('UPPER(c.client) LIKE :word'.$key)
-                   ->orWhere('UPPER(c.functionTitle) LIKE :word'.$key)
-                   ->setParameter('word'.$key, "%".strtoupper($keyword)."%");
-            }
-        }
-        if(!empty($params["inputFunctions"])){
-            $functions = array_map("trim", explode(",", $params["inputFunctions"]));
-            foreach ($functions as $key=>$function){
-                if($key==0 && !empty($params["inputKeywords"])){
-                    $qb->andWhere('UPPER(c.functionTitle) LIKE :title'.$key);
-                }else if($key==0){
-                    $qb->Where('UPPER(c.functionTitle) LIKE :title'.$key);
-                }else{
-                    $qb->orWhere('UPPER(c.functionTitle) LIKE :title'.$key);
-                }
-                $qb->setParameter('title'.$key, "%".strtoupper($function)."%");
-            }
-        }
-        //$consultants_list = $this->findBy($searchParams, array('missionEnd' => 'ASC'));
+        $this->buildKeywordsFilter($qb, $params);
+        $this->buildFunctionsFilter($qb, $params);
+        $this->buildLanguagesFilter($qb, $params);
+        $this->buildISUFilter($qb, $params);
+        $this->buildSkillsLevelFilter($qb, $params);
         $consultants_list = $qb->getQuery()->getResult();
         $consultantsSortlist = $this->sortByAvailabilityAsc($consultants_list);
         $consultantsFilterList= $this->filterByWeeksRemaining($consultantsSortlist, $params["rangeAvailability-a"],  $params["rangeAvailability-b"]);
-        return $consultantsFilterList;
+        $result= array();
+        foreach($consultantsFilterList as $consultant){
+            $keywords = array_map("trim", explode(",", $params["inputKeywords"]));
+            $result[]= $consultant->addSearchHighlight($keywords);
+        }
+        return  $result;
+    }
+    
+    private function buildKeywordsFilter($qb, $data){
+        if(!empty($data["inputKeywords"])){
+            $andModule =  $qb->expr()->andX();
+            $keywords = array_map("trim", explode(",", $data["inputKeywords"]));
+            foreach ($keywords as $key=>$keyword){
+                $orModule = $qb->expr()->orx();
+                $orModule->add($qb->expr()->like('UPPER(c.mainTag)',':word'.$key));
+                $orModule->add($qb->expr()->like('UPPER(c.technicalTag)',':word'.$key));
+                $orModule->add($qb->expr()->like('UPPER(c.functionalTag)',':word'.$key));
+                $orModule->add($qb->expr()->like('UPPER(c.newTag)',':word'.$key));
+                $orModule->add($qb->expr()->like('UPPER(c.activityArea)',':word'.$key));
+                $orModule->add($qb->expr()->like('UPPER(c.wishes)',':word'.$key));
+                $orModule->add($qb->expr()->like('UPPER(c.client)',':word'.$key));
+                $orModule->add($qb->expr()->like('UPPER(c.functionTitle)',':word'.$key));
+                $qb->setParameter('word'.$key, "%".strtoupper($keyword)."%");
+                $andModule->add($orModule);
+            }
+            $qb->Where($andModule);
+        }
+    }
+    
+    private function buildFunctionsFilter($qb, $data){
+        if(!empty($data["inputFunctions"])){
+            $orModule = $qb->expr()->orx();
+            $functions = array_map("trim", explode(",", $data["inputFunctions"]));
+            foreach ($functions as $key=>$function){
+                $orModule->add($qb->expr()->like('UPPER(c.functionTitle)',':title'.$key));
+                $qb->setParameter('title'.$key, "%".strtoupper($function)."%");
+            }
+            if(!empty($data["inputKeywords"])){
+                $qb->andWhere($orModule);
+            }else{
+                $qb->Where($orModule);
+            }
+        }
+    }
+    
+    private function buildLanguagesFilter($qb, $data){
+        if(!empty($data["language-choiceChecked"])){
+            $data["language-choice"]= array_merge($data["language-choice"], $data["language-choiceChecked"]);
+        }
+        if(!empty($data["language-choice"])){
+            $orModule = $qb->expr()->orx();
+            foreach ($data["language-choice"] as $key=>$langage){
+                if(empty($langage)) continue;
+                $orModule->add($qb->expr()->like('UPPER(c.languages)',':languageChoice'.$key));
+                $qb->setParameter('languageChoice'.$key, "%".strtoupper($langage)."%");
+                if(strtoupper($langage)=="ENGLISH"){
+                    $orModule->add($qb->expr()->like('UPPER(c.languages)',':languageEng'.$key));
+                    $qb->setParameter('languageEng'.$key, "%".strtoupper("anglais")."%");
+                }
+                if(strtoupper($langage)=="FRENCH"){
+                    $orModule->add($qb->expr()->like('UPPER(c.languages)',':languageFr'.$key));
+                    $qb->setParameter('languageFr'.$key, "%".strtoupper("français")."%");
+                }
+            }
+            if(!empty($data["inputKeywords"])||!empty($data["inputFunctions"])){
+                $qb->andWhere($orModule);
+            }else{
+                $qb->Where($orModule);
+            }
+        }
+    }
+    
+    private function buildISUFilter($qb, $data){
+        if(!empty($data["isu-choice"])){
+            $orModule = $qb->expr()->orx();
+            foreach ($data["isu-choice"] as $key=>$isu){
+                $orModule->add($qb->expr()->like('UPPER(c.isu)',':isu'.$key));
+                $qb->setParameter('isu'.$key, "%".strtoupper($level)."%");
+            }
+            if(!empty($data["inputKeywords"])||!empty($data["inputFunctions"])||!empty($data["language-choice"])){
+                $qb->andWhere($orModule);
+            }else{
+                $qb->Where($orModule);
+            }
+        }
+    }
+    
+    private function buildSkillsLevelFilter($qb, $data){
+        if(!empty($data["exp-choice"])){
+            $orModule = $qb->expr()->orx();
+            foreach ($data["exp-choice"] as $key=>$level){
+                $orModule->add($qb->expr()->like('UPPER(c.skillsLevel)',':level'.$key));
+                $qb->setParameter('level'.$key, "%".strtoupper($level)."%");
+            }
+            if(!empty($data["inputKeywords"])||!empty($data["inputFunctions"])||!empty($data["language-choice"])||!empty($data["isu-choice"])){
+                $qb->andWhere($orModule);
+            }else{
+                $qb->Where($orModule);
+            }
+        }
     }
     
     private function filterByWeeksRemaining($consultantsArray, $min, $max){
@@ -58,6 +130,7 @@ class ConsultantRepository extends EntityRepository
         }
         return $result;
     }
+    
     private function sortByAvailabilityAsc($consultantsArray){
         if($this->isSortByAvailabilityAsc($consultantsArray)){
             return $consultantsArray;
