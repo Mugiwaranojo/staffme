@@ -6,6 +6,22 @@ use Doctrine\ORM\EntityRepository;
 
 class ConsultantRepository extends EntityRepository
 {
+   
+    public function findAllTags(){
+        $result= array();
+        $allConsultant= $this->findAll();
+        foreach($allConsultant as $consultant){
+            $this->addValueToArray($consultant->getFunctionTitle(), $result);
+            $this->addValueToArray($consultant->getMainTag(), $result);
+            $this->addValueToArray($consultant->getTechnicalTag(), $result);
+            $this->addValueToArray($consultant->getFunctionalTag(), $result);
+            $this->addValueToArray($consultant->getNewTag(), $result);
+            $this->addValueToArray($consultant->getActivityArea(), $result);
+            $this->addValueToArray($consultant->getClient(), $result);
+            $this->addValueToArray($consultant->getWishes(), $result);
+        }
+        return $result;
+    }
     
     public function findByAvailability($params){
         $qb = $this->createQueryBuilder("c");
@@ -24,6 +40,20 @@ class ConsultantRepository extends EntityRepository
             $result[]= $consultant->addSearchHighlight($keywords);
         }
         return  $result;
+    }
+    
+    private function addValueToArray($value, &$array){
+        if(!empty($value)){
+            if(is_string($value) && !in_array(strtoupper($value), $array)){
+                $array[]=strtoupper($value);
+            }else if(is_array ($value)){
+                foreach ($value as $val){
+                    if(!in_array(strtoupper($val), $array)){
+                        $array[]=  strtoupper($val);
+                    }
+                }
+            }
+        }
     }
     
     private function buildKeywordsFilter($qb, $data){

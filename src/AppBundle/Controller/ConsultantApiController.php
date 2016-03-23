@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Controller\Annotations\RouteResource;
+
 
 class ConsultantApiController extends FOSRestController
 {
@@ -27,11 +29,18 @@ class ConsultantApiController extends FOSRestController
             ->setTemplateVar('consultants')
         ;
         $handleView= $this->handleView($view);
-        $handleView->headers->addCacheControlDirective('no-cache', true);
-        $handleView->headers->addCacheControlDirective('max-age', 0);
-        $handleView->headers->addCacheControlDirective('must-revalidate', true);
-        $handleView->headers->addCacheControlDirective('no-store', true);
         return $handleView;
+    }
+    
+    public function getTagsAction(){
+        $data= $this->getDoctrine()->getRepository('AppBundle:Consultant')->findAllTags();
+        $view = $this->view($data, 200)
+            ->setTemplate("AppBundle:api:consultants.html.twig")
+            ->setTemplateVar('consultants')
+        ;
+        $handleView= $this->handleView($view);
+        return $handleView;
+        
     }
 }
 ?>

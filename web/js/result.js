@@ -4,7 +4,7 @@ var consultantsArray;
 function updateConsultants(){
     $(".ui-loader").show();
     $.ajax({
-        url: "/api/consultants"+document.location.search,
+        url: "/api/consultants",
         type: "get", //send it through get method
         data:  $("#formSearch").serialize(),
         success: function(response) {
