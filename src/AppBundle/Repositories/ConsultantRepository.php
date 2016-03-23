@@ -9,6 +9,7 @@ class ConsultantRepository extends EntityRepository
     
     public function findByAvailability($params){
         $qb = $this->createQueryBuilder("c");
+        $qb->Where("1=1");
         $this->buildKeywordsFilter($qb, $params);
         $this->buildFunctionsFilter($qb, $params);
         $this->buildLanguagesFilter($qb, $params);
@@ -42,7 +43,7 @@ class ConsultantRepository extends EntityRepository
                 $qb->setParameter('word'.$key, "%".strtoupper($keyword)."%");
                 $andModule->add($orModule);
             }
-            $qb->Where($andModule);
+            $qb->andWhere($andModule);
         }
     }
     
@@ -54,11 +55,7 @@ class ConsultantRepository extends EntityRepository
                 $orModule->add($qb->expr()->like('UPPER(c.functionTitle)',':title'.$key));
                 $qb->setParameter('title'.$key, "%".strtoupper($function)."%");
             }
-            if(!empty($data["inputKeywords"])){
-                $qb->andWhere($orModule);
-            }else{
-                $qb->Where($orModule);
-            }
+            $qb->andWhere($orModule);
         }
     }
     
@@ -81,11 +78,7 @@ class ConsultantRepository extends EntityRepository
                     $qb->setParameter('languageFr'.$key, "%".strtoupper("français")."%");
                 }
             }
-            if(!empty($data["inputKeywords"])||!empty($data["inputFunctions"])){
-                $qb->andWhere($orModule);
-            }else{
-                $qb->Where($orModule);
-            }
+           $qb->andWhere($orModule);
         }
     }
     
@@ -96,11 +89,7 @@ class ConsultantRepository extends EntityRepository
                 $orModule->add($qb->expr()->like('UPPER(c.isu)',':isu'.$key));
                 $qb->setParameter('isu'.$key, "%".strtoupper($level)."%");
             }
-            if(!empty($data["inputKeywords"])||!empty($data["inputFunctions"])||!empty($data["language-choice"])){
-                $qb->andWhere($orModule);
-            }else{
-                $qb->Where($orModule);
-            }
+            $qb->andWhere($orModule);
         }
     }
     
@@ -111,11 +100,7 @@ class ConsultantRepository extends EntityRepository
                 $orModule->add($qb->expr()->like('UPPER(c.skillsLevel)',':level'.$key));
                 $qb->setParameter('level'.$key, "%".strtoupper($level)."%");
             }
-            if(!empty($data["inputKeywords"])||!empty($data["inputFunctions"])||!empty($data["language-choice"])||!empty($data["isu-choice"])){
-                $qb->andWhere($orModule);
-            }else{
-                $qb->Where($orModule);
-            }
+            $qb->andWhere($orModule);
         }
     }
     
