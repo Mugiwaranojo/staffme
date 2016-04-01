@@ -4,14 +4,14 @@
     <div data-role="page" id="searchpage">
         <div data-role="header" class="topbar">
             <a href="#" data-icon="bars"></a>
-            <h1>Staff-Me</h1>
+            <img src="/images/logoTopBar.png" alt="staff-me">
             <a href="#" data-icon="search" id="searchTop"></a>
         </div> 
         <div data-role="main" class="ui-content">
             
             <form id='formSearch' method="GET" action="#" data-transition="slide" data-dom-cache="false">
                 <div class="ui-field-contain">
-                        <label for="inputKeywords">KEYWORDS (separate by comma)</label>
+                        <label for="inputKeywords">Keywords (separate by comma)</label>
                         <input name="inputKeywords" id="inputKeywords" placeholder="example : Java, AGILE, ..." value="" type="text" maxlength="300">
                 </div>
                <!-- <div class="ui-field-contain">
@@ -19,30 +19,32 @@
                         <input name="inputFunctions" id="inputFunctions" placeholder="example : Developpeur, Chef de projet, ..." value="" type="text">
                 </div>-->
                 <div data-role="rangeslider" data-track-theme="a" data-theme="b">
-                  <label for="rangeAvailability-a">AVAILABILITY</label>
+                  <label for="rangeAvailability-a">Availability</label>
                   <input name="rangeAvailability-a" id="rangeAvailability-a" min="0" max="8" value="0" type="range" class="findRange"/>
-                  <label for="rangeAvailability-b">AVAILABILITY</label>
+                  <label for="rangeAvailability-b">Availability</label>
                   <input name="rangeAvailability-b" id="rangeAvailability-b" min="0" max="8" value="4" type="range" class="findRange"/>
                 </div>
                 <div id="availabilityValues">
                         <div id="availabilityValueA">ASAP</div>
                         <div id="availabilityValueB">4 weeks</div>
                 </div>
-                <button id="buttonValidSearch" data-theme="b">SEARCH</button>
-                <button id="buttonMoreFilter" data-theme="b">MORE FILTER <i class="fa fa-chevron-right"></i></button>
+                <button id="buttonValidSearch" data-theme="b">Search</button>
+                <button id="buttonMoreFilter" data-theme="b">More filter <i class="fa fa-chevron-right"></i></button>
                 <div id="moreFilter">
-                    <div data-role="rangeslider" data-track-theme="a" data-theme="b">
-                        <label for="rangeOnMissionSince-a">ON MISSION SINCE</label>
-                        <input name="rangeOnMissionSince-a" id="rangeOnMissionSince-a" min="1" max="6" value="1" type="range" class="findRange"/>
-                        <label for="rangeOnMissionSince-b">ON MISSION SINCE</label>
-                        <input name="rangeOnMissionSince-b" id="rangeOnMissionSince-b" min="1" max="6" value="3" type="range" class="findRange"/>
-                    </div>
-                    <div id="onMissionSinceValues">
-                            <div id="onMissionSinceValueA">-1 year</div>
-                            <div id="onMissionSinceValueB">-3 years</div>
-                    </div>
                     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-                        <legend>LANGUAGE NEEDED</legend>
+                        <legend>On mission since :</legend>
+                        <input type="radio" name="valueOnMissionSince" id="onMissionSince-choice1" value="-1" />
+                        <label for="onMissionSince-choice1">-1 year</label>
+                        <input type="radio" name="valueOnMissionSince" id="onMissionSince-choice2" value="-2"  />
+                        <label for="onMissionSince-choice2">-2 years</label>
+                        <input type="radio" name="valueOnMissionSince" id="onMissionSince-choice3" value="-3"  />
+                        <label for="onMissionSince-choice3">-3 years</label>
+                        <input type="radio" name="valueOnMissionSince" id="onMissionSince-choice4" value="3"  />
+                        <label for="onMissionSince-choice4">+3 years</label>
+                    </fieldset>
+                    
+                    <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+                        <legend>Language needed :</legend>
                         <input type="checkbox" name="language-choiceChecked[]" id="language-choice1" value="ENGLISH" />
                         <label for="language-choice1">ENGLISH</label>
                         <input type="checkbox" name="language-choiceChecked[]" id="language-choice2" value="SPANISH"  />
@@ -51,11 +53,11 @@
                         <label for="language-choice3">ITALIAN</label>
                     </fieldset>
                     <div class="ui-field-contain">
-                        <label for="language-other">OTHER</label>
-                        <input name="language-choice[]" id="language-other" value="" type="text" maxlength="300">
+                        <label for="language-other">Other :</label>
+                        <input name="language-choice[]" id="language-other" value="" placeholder="Other languages..." type="text" maxlength="300">
                     </div>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-                        <legend>ISU</legend>
+                        <legend>ISU :</legend>
                         <input type="checkbox" name="isu-choice[]" id="isu-choice1" value="U1" />
                         <label for="isu-choice1">U1</label>
                         <input type="checkbox" name="isu-choice[]" id="isu-choice2" value="U2" />
@@ -70,26 +72,33 @@
                         <label for="isu-choice6">DIGITAL</label>
                     </fieldset>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-                        <legend>EXPERIENCE</legend>
+                        <legend>Experience :</legend>
                         <input type="checkbox" name="exp-choice[]" id="exp-choice1" value="JUNIOR" />
-                        <label for="exp-choice1">JUNIOR</label>
+                        <label for="exp-choice1">Junior</label>
                         <input type="checkbox" name="exp-choice[]" id="exp-choice2" value="MIDDLE" />
-                        <label for="exp-choice2">MIDDLE</label>
+                        <label for="exp-choice2">Middle</label>
                         <input type="checkbox" name="exp-choice[]" id="exp-choice3" value="SENIOR" />
-                        <label for="exp-choice3">SENIOR</label>
+                        <label for="exp-choice3">Senior</label>
                     </fieldset>
-                    <button id="buttonValidSearch2" data-theme="b">SEARCH</button>
+                    <button id="buttonValidSearch2" data-theme="b">Search</button>
                 </div>
             </form>
             
-            <div id="result_top" class="ui-grid-b">
-                <!--<button class="ui-block-a" id="buttonSearchPage"><i class="fa fa-search"></i> SEARCH</button>-->
-                <button class="ui-block-a"><i class="fa fa-sort"></i> SORT</button>
-                <button class="ui-block-b" id="buttonDetails" data-value="details"><i class="fa fa-clone"></i> DETAILS</button>
-                <div id="nav_consultant" class="ui-block-d ui-grid-b">
-                    <a class="ui-block-a" href="#"> < </a>
-                    <span class="ui-block-b"> 1/12 </span>
-                    <a class="ui-block-c" href="#"> > </a>
+            <div id="result_top">
+                <div class="ui-grid-a">
+                    <button class="ui-block-a" id="buttonSearchBack"><i class="fa fa-caret-left"></i> Back to search</button>
+                    <button class="ui-block-b"><i class="fa fa-caret-down" style="float: right"></i> Sort by</button>
+                </div>
+                <div class="ui-grid-a">
+                    <div id="nav_consultant" class="ui-block-a ui-grid-b">
+                        <a class="ui-block-a" href="#"> < </a>
+                        <span class="ui-block-b"> 1/12 </span>
+                        <a class="ui-block-c" href="#"> > </a>
+                    </div>
+                    <div id="nav_consultant_matches" class="ui-block-a">
+                        5 matches
+                    </div>
+                    <button class="ui-block-b" id="buttonDetails" data-value="details"><i class="fa fa-clone"></i> DETAILS</button>
                 </div>
             </div>
             

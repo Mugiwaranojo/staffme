@@ -20,6 +20,8 @@ function updateConsultants(){
                 init_swap();
                 initListButton();
             }
+            $("#nav_consultant_matches").html(response.length+" matches")
+            $("#nav_consultant_matches").show();
             $("#nav_consultant").hide();
             $(".ui-loader").hide();
             $("#formSearch").slideUp();
@@ -48,18 +50,18 @@ function init_swap(){
 
     $(".consultants_details").on("swipeleft",function(){
         $(this).addClass('rotate-right').delay(700).fadeOut(1);
-        if ( $(this).is(':last-child') ) {
-            current_consultant=1;
-            $('.consultants_details:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+        if ( $(this).is(':first-child') ) {
+            current_consultant= consultantsArray.length;;
+            $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
         } else {
-            current_consultant++;
-            $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
+            current_consultant--;
+            $(this).prev().removeClass('rotate-left rotate-right').fadeIn(400);
         }
         $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });
     $("#nav_consultant .ui-block-a").unbind('click');
     $("#nav_consultant .ui-block-a").on("click", function(){
-        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-left').delay(700).fadeOut(1);
+        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-right').delay(700).fadeOut(1);
         if(current_consultant==1){
             current_consultant= consultantsArray.length;
         }else{
@@ -70,7 +72,7 @@ function init_swap(){
     });
     $("#nav_consultant .ui-block-c").unbind('click');
     $("#nav_consultant .ui-block-c").on("click", function(){
-        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-right').delay(700).fadeOut(1);
+        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-left').delay(700).fadeOut(1);
         if(current_consultant==consultantsArray.length){
             current_consultant=1;
         }else{
@@ -91,6 +93,7 @@ function initListButton(){
         $("#result_list").hide();
         $("#result_details").show();
         $("#nav_consultant").show();
+        $("#nav_consultant_matches").hide();
         $(".consultants_details_bottom").show();
         $("#buttonDetails").html("<i class='fa fa-list'></i> LIST");
         $("#buttonDetails").data('value',"list");
@@ -101,6 +104,7 @@ function initListButton(){
             $("#result_list").hide();
             $("#result_details").show();
             $("#nav_consultant").show();
+            $("#nav_consultant_matches").hide();
             $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
             $('.consultants_details:nth-child('+current_consultant+')').show();
             $(".consultants_details_bottom").show();
@@ -110,6 +114,7 @@ function initListButton(){
             $("#nav_consultant").hide();
             $("#result_details").hide();
             $(".consultants_details_bottom").hide();
+            $("#nav_consultant_matches").show();
             $("#result_list").show();
             $(this).html("<i class='fa fa-clone'></i> DETAILS");
             $(this).data('value',"details");
@@ -123,10 +128,11 @@ function updateConsultantsList(consultants){
     var htmlLists="";
     for(var i=0;i<consultants.length;i++){
         var number=i+1;
-        var consultant="<div class='ui-grid-b ui-btn ui-corner-all' data-consultant-number='"+number+"'>";
-        consultant+="<span class='ui-block-a'>"+consultants[i].firstname+" "+consultants[i].lastname+"</span>";
-        consultant+="<span class='ui-block-b'>"+consultants[i].function_title+"</span>";
-        consultant+="<span class='ui-block-c status_availability availability_"+getAvailabilityStatus(consultants[i])+"'></span>";
+        var consultant="<div data-consultant-number='"+number+"'>";
+        consultant+="<span>"+consultants[i].firstname+" "+consultants[i].lastname+"</span>";
+        consultant+="<span>"+consultants[i].function_title+"</span>";
+        consultant+="<i class='fa fa-heart-o'></i>"
+        consultant+="<span class='status_availability availability_"+getAvailabilityStatus(consultants[i])+"'></span>";
         consultant+="</div>\n";
         htmlLists+=consultant;
     }
