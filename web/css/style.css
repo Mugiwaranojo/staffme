@@ -40,31 +40,49 @@
     z-index: 2;
 }
 #container h3{
-    margin-top: 50px;
-    font-size: 2em;
+    margin-top: 70px;
+    font-size: 3em;
+    font-family: "Calibri";
+    color: rgb(255, 255, 255);
+    line-height: 0.338;
+    text-align: center;
+    -moz-transform: matrix( 0.53494392453735,0,0,0.53494392453735,0,0);
+    -webkit-transform: matrix( 0.53494392453735,0,0,0.53494392453735,0,0);
+    -ms-transform: matrix( 0.53494392453735,0,0,0.53494392453735,0,0);
 }
 #container h4{
-    font-size: 1.3em;
-    padding: 0px 70px;
+    margin-top: 85px;
+    font-size: 2.3em;
+    font-family: "Calibri";
+    color: rgb(255, 255, 255);
+    line-height: 1.2;
+    text-align: center;
+    -moz-transform: matrix( 0.53494392453735,0,0,0.53494392453735,0,0);
+    -webkit-transform: matrix( 0.53494392453735,0,0,0.53494392453735,0,0);
+    -ms-transform: matrix( 0.53494392453735,0,0,0.53494392453735,0,0);
 }
 #container #logoHome{
-    height: 250px;
-    width: 250px;
+    height: 120px;
+    width: 120px;
     background: #FFF;
-    border-radius: 125px;
+    border-radius: 10px;
     margin: auto;
+    margin-top: 80px;
 }
 #container #logoHome img{
-    padding: 35px 48px;
-    height: 170px;
+    padding: 22px 28px;
+    height: 70px;
 }
 #loginButton{
-    margin: 50px 50px;
+    font-family: "Calibri";
+    font-size: 1.3em;
+    margin: 65px;
     text-transform: uppercase;
-    background: #000;
+    background-color: rgb(0, 122, 195);
     border: none;
     color: #FFF;
     font-weight: lighter;
+    border-radius: 0px;
 }
 
 @media only screen and (min-width : 640px) {
@@ -151,7 +169,6 @@ input.ui-slider-input {
 .ui-mobile label{
   font-family: "Calibri";
   color: rgb(0, 122, 194);
-  font-weight: bold;
   line-height: 1.127;
 }
 
@@ -161,9 +178,6 @@ input.ui-slider-input {
 
 .ui-slider-handle {
     background-color: rgb(0, 122, 194) !important;
-    width: 12px !important;
-    height: 34px !important;
-    top: 5px !important;
     border: none;
 }
 
@@ -172,18 +186,18 @@ input.ui-slider-input {
     display:none;
 }
 .ui-rangeslider-sliders{
-    margin: 0px 15px !important;
+    margin: 0px 30px !important;
 }
 
 #availabilityValueA, #availabilityValueB, #onMissionSinceValueA, #onMissionSinceValueB{
     position: absolute;
-    background: #FFF;
     border-radius: 10px;
     padding: 0px 5px;
-    left: 10px;
+    left: 20px;
+   font-family: "Calibri";
 }
 #availabilityValueB{
-    left: 165px;
+    left: 155px;
 }
 #onMissionSinceValueB{
     left: 117px;
@@ -201,6 +215,7 @@ input.ui-slider-input {
     margin: 0px auto;
 }
 #buttonMoreFilter{
+    font-family: "Calibri";
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -210,6 +225,7 @@ input.ui-slider-input {
     text-align: left;
     border-radius: 0px;
     text-shadow: none;
+    padding: 20px;
 }
 
 .activeMoreFilter{
@@ -242,12 +258,14 @@ input.ui-slider-input {
     margin-top: -12px;
 }
 #moreFilter legend{
+    font-family: "Calibri";
     padding: 10px 0px;
     color: rgb(0, 122, 194);
 }
 #moreFilter fieldset .ui-checkbox, #moreFilter fieldset .ui-radio{
     width: 22.5%;
     margin-right: 10px;
+    font-family: "Calibri";
 }
 #moreFilter fieldset .ui-checkbox:last-child, #moreFilter fieldset .ui-radio:last-child{
     margin-right: 0px;
@@ -256,9 +274,11 @@ input.ui-slider-input {
     font-size: 0.8em;
     border: none;
     text-align: center;
+    font-family: "Calibri";
 }
 #moreFilter fieldset + fieldset .ui-checkbox{
     width: 31%;
+    font-family: "Calibri";
 }
 
 #moreFilter div + fieldset .ui-checkbox{
@@ -274,6 +294,7 @@ input.ui-slider-input {
 
 #moreFilter button{
     margin-top: 20px;
+    font-family: "Calibri";
 }
 
 /*
@@ -362,10 +383,10 @@ input.ui-slider-input {
 .status_availability{
     margin: 0px;
     position: absolute;
-    width: 20px !important;
-    height: 20px;
+    width: 10px !important;
+    height: 90px;
     right: 10px;
-    border-radius: 10px
+    border-radius: 0px
 }
 .availability_1{
     background: red !important;
@@ -404,38 +425,39 @@ input.ui-slider-input {
 
 @media only screen and (min-height : 640px) {
     #result_details{
-        height: 520px;
+        height: 440px;
     }
 }
 @media only screen and (min-height : 660px) {
     #result_details{
-        height: 545px;
+        height: 470px;
     }
 }
-@media only screen and (min-height : 770px) {
+@media only screen and (min-height : 700px) {
     #result_details{
-        height: 650px;
+        height: 530px;
     }
 }
 .consultants_details {
   display: none;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 0px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   position: absolute;
   width: 94%;
   cursor: hand;
 }
-
 .consultants_details div{
     text-transform: uppercase;
-    background-color: #e8e8e8;
-    color:#000;
+    font-family: "Calibri";
+    color: rgb(132, 132, 132);
     font-size: 0.9em;
     font-weight: bold;
 }
 .consultants_details div span{
-    color: #999;
+    display: block;
+    color:rgb(0, 122, 194);
+    font-family: "Calibri";
 }
 
 .consultants_details div span+span, .consultants_details div i+span{
@@ -448,15 +470,21 @@ input.ui-slider-input {
    padding: 5px;
    margin: 5px 0px;
 }
-
+.consultants_details > div+div{
+    margin: 0px 16px;
+    border-bottom: 1px solid;
+}
 .consultants_details > div:first-child{                                         
-    margin-top: 0px;
+    margin: 15px;
+    border: 1px solid rgb(0, 122, 194);
+    font-family: "Calibri";
 }
 .consultants_details_id, .consultants_details > div:last-child{                                           
-    margin: 0px !important;
+    margin-top: 0px;
 }
 .consultants_details .status_availability{
-    right: 8px;
+    right: 16px;
+    top: 16px;
 }
 
 .consultants_details_bottom{
@@ -467,6 +495,7 @@ input.ui-slider-input {
     bottom: 0px;
     left: 0px;
     padding:0px !important;
+    margin: 0px!important;
 }
 
 .consultants_details_bottom a{

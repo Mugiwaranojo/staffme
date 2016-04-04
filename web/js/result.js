@@ -36,8 +36,8 @@ function updateConsultants(){
 }
 
 function init_swap(){
-    $(".consultants_details").on("swiperight",function(){
-        $(this).addClass('rotate-left').delay(700).fadeOut(1);
+    $(".consultants_details").on("swipeleft",function(){
+        $(this).addClass('rotate-right').delay(700).fadeOut(1);
         if ( $(this).is(':last-child') ) {
             current_consultant=1;
             $('.consultants_details:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
@@ -48,8 +48,8 @@ function init_swap(){
         $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });  
 
-    $(".consultants_details").on("swipeleft",function(){
-        $(this).addClass('rotate-right').delay(700).fadeOut(1);
+    $(".consultants_details").on("swiperight",function(){
+        $(this).addClass('rotate-left').delay(700).fadeOut(1);
         if ( $(this).is(':first-child') ) {
             current_consultant= consultantsArray.length;;
             $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
@@ -61,7 +61,7 @@ function init_swap(){
     });
     $("#nav_consultant .ui-block-a").unbind('click');
     $("#nav_consultant .ui-block-a").on("click", function(){
-        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-right').delay(700).fadeOut(1);
+        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-left').delay(700).fadeOut(1);
         if(current_consultant==1){
             current_consultant= consultantsArray.length;
         }else{
@@ -72,7 +72,7 @@ function init_swap(){
     });
     $("#nav_consultant .ui-block-c").unbind('click');
     $("#nav_consultant .ui-block-c").on("click", function(){
-        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-left').delay(700).fadeOut(1);
+        $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-right').delay(700).fadeOut(1);
         if(current_consultant==consultantsArray.length){
             current_consultant=1;
         }else{
@@ -156,19 +156,19 @@ function updateConsultantsDetails(consultants){
                     }
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_main_tag'>";
-                    consultant+="<span><i class='fa fa-tag'></i> MAIN TAG</span>: ";
+                    consultant+="<span><i class='fa fa-tag'></i> MAIN TAG</span>";
                     consultant+=displayTags(consultants[i].main_tag);
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_functional_tag'>";
-                    consultant+="<span><i class='fa fa-pencil'></i> FUNCTIONAL TAG</span>: ";
+                    consultant+="<span><i class='fa fa-pencil'></i> FUNCTIONAL TAG</span>";
                     consultant+=displayTags(consultants[i].functional_tag);
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_technical_tag'>";
-                    consultant+="<span><i class='fa fa-wrench'></i> TECHNICAL TAG</span>: ";
+                    consultant+="<span><i class='fa fa-wrench'></i> TECHNICAL TAG</span>";
                     consultant+=displayTags(consultants[i].technical_tag);
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_new_tag'>";
-                    consultant+="<span><i class='fa fa-bookmark-o'></i> NEW TAG</span>: ";
+                    consultant+="<span><i class='fa fa-bookmark-o'></i> NEW TAG</span>";
                     consultant+=displayTags(consultants[i].new_tag);
                 consultant+="</div>\n";
                 /*consultant+="<div class='consultants_details_wishes'>";
@@ -176,15 +176,15 @@ function updateConsultantsDetails(consultants){
                     consultant+=displayTags(consultants[i].wishes);
                 consultant+="</div>\n";*/
                 consultant+="<div class='consultants_details_activity_area'>";
-                    consultant+="<span><i class='fa fa-plane'></i> ACTIVITY AREA</span>: ";
+                    consultant+="<span><i class='fa fa-plane'></i> ACTIVITY AREA</span>";
                     consultant+=displayTags(consultants[i].activity_area);
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_languages'>";
-                    consultant+="<span><i class='fa fa-language'></i> LANGUAGE</span>: ";
+                    consultant+="<span><i class='fa fa-language'></i> LANGUAGE</span>";
                     consultant+=displayLanguages(consultants[i].languages);
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_manager'>";
-                    consultant+="<span><i class='fa fa-mobile-phone'></i> CONTACT</span>: ";
+                    consultant+="<span><i class='fa fa-mobile-phone'></i> CONTACT</span>";
                     consultant+=consultants[i].manager;
                 consultant+="</div>\n";
                 /*consultant+="<div class='consultants_details_adress'>";
@@ -192,7 +192,7 @@ function updateConsultantsDetails(consultants){
                     consultant+=consultants[i].adresse;
                 consultant+="</div>\n";*/
                 consultant+="<div class='consultants_details_id'>";
-                    consultant+="<span><i class='fa fa-key'></i> ID</span>: ";
+                    consultant+="<span><i class='fa fa-key'></i> ID</span>";
                     consultant+=consultants[i].id;
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_bottom ui-grid-b'>";
@@ -272,7 +272,7 @@ function getAvailabilityStatus(objConsultant){
         }
     }
     if(objConsultant.availability.value==5){
-        return objConsultant.availability.value+" ui-icon-delete ui-btn-icon-notext";
+        return objConsultant.availability.value;
     }
     return objConsultant.availability.value;
     

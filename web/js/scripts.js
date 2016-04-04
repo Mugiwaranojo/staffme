@@ -94,11 +94,11 @@ function extractLast( term ) {
 function onAvaibalityChange(event){
     var left=0;
     if(event.target.id==="rangeAvailability-b"){
-        left= $($(".ui-btn-b").get(1)).position().left-10;
+        left= $($(".ui-btn-b").get(1)).position().left+10;
         $("#availabilityValueB").attr("style", "left:"+left+"px");
         $("#availabilityValueB").html(setAvaibalityValue($("#rangeAvailability-b")[0].valueAsNumber));
     }else{
-        left= $($(".ui-btn-b").get(0)).position().left;
+        left= $($(".ui-btn-b").get(0)).position().left+10;
         $("#availabilityValueA").attr("style", "left:"+left+"px");
         $("#availabilityValueA").html(setAvaibalityValue($("#rangeAvailability-a")[0].valueAsNumber));
     }
