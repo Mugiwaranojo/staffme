@@ -31,7 +31,7 @@
 #backgroundImage{
     position: absolute;
     background: transparent url("/images/background.png");
-    background-size: auto 100%;
+    background-size: 100% 100%;
     font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
     z-index: 0;
 }
