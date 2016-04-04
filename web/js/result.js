@@ -153,6 +153,8 @@ function updateConsultantsDetails(consultants){
                     if(consultants[i].mission_end){
                         var dateEndMission= new Date(consultants[i].mission_end);
                         consultant+="<div><i class='fa fa-hourglass-3'></i> MISSION END: "+displayDate(dateEndMission)+"</div>";
+                    }else{
+                        consultant+="<div><i class='fa fa-hourglass-3'></i> MISSION END:</div>";
                     }
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_main_tag'>";
