@@ -384,7 +384,7 @@ input.ui-slider-input {
     margin: 0px;
     position: absolute;
     width: 10px !important;
-    height: 90px;
+    height: 106px;
     right: 10px;
     border-radius: 0px
 }
@@ -462,9 +462,7 @@ input.ui-slider-input {
 
 .consultants_details div span+span, .consultants_details div i+span{
     color: #ffcc00;
-    background: #FFF;
-    border-radius: 10px;
-    padding: 0px 3px;
+    display: inline;
 }
 .consultants_details > div{
    padding: 5px;
@@ -485,6 +483,9 @@ input.ui-slider-input {
 .consultants_details .status_availability{
     right: 16px;
     top: 16px;
+}
+.consultants_details_main > span+div{
+    color: rgb(0, 122, 194);
 }
 
 .consultants_details_bottom{
