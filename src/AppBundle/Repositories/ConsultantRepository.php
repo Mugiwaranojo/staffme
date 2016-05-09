@@ -27,9 +27,6 @@ class ConsultantRepository extends EntityRepository
         $qb = $this->createQueryBuilder("c");
         $qb->Where("1=1");
         $this->buildKeywordsFilter($qb, $params);
-        $this->buildFunctionsFilter($qb, $params);
-        $this->buildLanguagesFilter($qb, $params);
-        $this->buildISUFilter($qb, $params);
         $this->buildSkillsLevelFilter($qb, $params);
         $consultants_list = $qb->getQuery()->getResult();
         $consultantsSortlist = $this->sortByAvailabilityAsc($consultants_list);
@@ -89,28 +86,7 @@ class ConsultantRepository extends EntityRepository
         }
     }
     
-    private function buildLanguagesFilter($qb, $data){
-        if(!empty($data["language-choiceChecked"])){
-            $data["language-choice"]= array_merge($data["language-choice"], $data["language-choiceChecked"]);
-        }
-        if(!empty($data["language-choice"])){
-            $orModule = $qb->expr()->orx();
-            foreach ($data["language-choice"] as $key=>$langage){
-                if(empty($langage)) continue;
-                $orModule->add($qb->expr()->like('UPPER(c.languages)',':languageChoice'.$key));
-                $qb->setParameter('languageChoice'.$key, "%".strtoupper($langage)."%");
-                if(strtoupper($langage)=="ENGLISH"){
-                    $orModule->add($qb->expr()->like('UPPER(c.languages)',':languageEng'.$key));
-                    $qb->setParameter('languageEng'.$key, "%".strtoupper("anglais")."%");
-                }
-                if(strtoupper($langage)=="FRENCH"){
-                    $orModule->add($qb->expr()->like('UPPER(c.languages)',':languageFr'.$key));
-                    $qb->setParameter('languageFr'.$key, "%".strtoupper("français")."%");
-                }
-            }
-           $qb->andWhere($orModule);
-        }
-    }
+   
     
     private function buildISUFilter($qb, $data){
         if(!empty($data["isu-choice"])){

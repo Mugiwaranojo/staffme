@@ -13,7 +13,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:default:index.html.twig');
+        return $this->redirectToRoute('searchpage');
     }
 	
     /**
@@ -22,5 +22,21 @@ class DefaultController extends Controller
     public function searchAction(Request $request)
     {
         return $this->render('AppBundle:default:search.html.twig');
+    }
+    
+    /**
+     * @Route("/favorites", name="favoritespage")
+     */
+    public function favoritesAction(Request $request)
+    {
+        return $this->render('AppBundle:default:favorites.html.twig');
+    }
+    
+    /**
+     * @Route("/myresearches", name="myresearchespage")
+     */
+    public function myresearchesAction(Request $request)
+    {
+        return $this->render('AppBundle:default:myresearches.html.twig');
     }
 }

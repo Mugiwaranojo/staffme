@@ -1,0 +1,34 @@
+AppBundle\Entity\Favoris:
+    type: entity
+    table: favoris
+    id:
+        userId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: user_id
+        consultantId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: consultant_id
+    fields:
+        isavailable:
+            type: boolean
+            nullable: true
+            options:
+                default: '1'
+        updated:
+            type: datetime
+            nullable: true
+        created:
+            type: datetime
+            nullable: true
+            options:
+                default: CURRENT_TIMESTAMP
+    repositoryClass: AppBundle\Repositories\FavorisRepository
+    lifecycleCallbacks: {  }

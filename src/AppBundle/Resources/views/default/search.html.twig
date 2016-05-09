@@ -3,16 +3,16 @@
 {% block body %}
     <div data-role="page" id="searchpage">
         <div data-role="header" class="topbar">
-            <a href="#" data-icon="bars"></a>
+            <a href="#left-panel" data-icon="bars"></a>
             <img src="/images/logoTopBar.png" alt="staff-me">
             <a href="#" data-icon="search" id="searchTop"></a>
-        </div> 
-        <div data-role="main" class="ui-content">
-            
+        </div><!-- /header -->
+        {{ include('AppBundle:default:panelmenu.html.twig') }}
+        <div data-role="content" class="ui-content">
             <form id='formSearch' method="GET" action="#" data-transition="slide" data-dom-cache="false">
-                <div class="ui-field-contain">
+                <div class="ui-field-contain ui-widget">
                         <label for="inputKeywords">Keywords (separate by comma)</label>
-                        <input name="inputKeywords" id="inputKeywords" placeholder="example : Java, AGILE, ..." value="" type="text" maxlength="300">
+                        <input name="inputKeywords" data-clear-btn="true" id="inputKeywords" placeholder="example : Java, AGILE, ..." type="text" maxlength="300">
                 </div>
                <!-- <div class="ui-field-contain">
                         <label for="inputFunctions">FUNCTION(separate by comma)</label>
@@ -44,14 +44,18 @@
                     </fieldset>
                     
                     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-                        <legend>Language needed :</legend>
-                        <input type="checkbox" name="language-choiceChecked[]" id="language-choice1" value="ENGLISH" />
-                        <label for="language-choice1">ENGLISH</label>
-                        <input type="checkbox" name="language-choiceChecked[]" id="language-choice2" value="SPANISH"  />
-                        <label for="language-choice2">SPANISH</label>
-                        <input type="checkbox" name="language-choiceChecked[]" id="language-choice3" value="ITALIAN"  />
-                        <label for="language-choice3">ITALIAN</label>
+                        <legend>English level :</legend>
+                        <input type="radio" name="language-level" id="language-choice1" value="1" />
+                        <label for="language-choice1">BEGGINNER</label>
+                        <input type="radio" name="language-level" id="language-choice2" value="2"  />
+                        <label for="language-choice2">INTERMEDIATE</label>
+                        <input type="radio" name="language-level" id="language-choice3" value="3"  />
+                        <label for="language-choice3">CURRENT</label>
+                        <input type="radio" name="language-level" id="language-choice4" value="4"  />
+                        <label for="language-choice4">MATTERNAL</label>
                     </fieldset>
+                    
+                    <!--
                     <div class="ui-field-contain">
                         <label for="language-other">Other :</label>
                         <input name="language-choice[]" id="language-other" value="" placeholder="Other languages..." type="text" maxlength="300">
@@ -71,6 +75,7 @@
                         <input type="checkbox" name="isu-choice[]" id="isu-choice6" value="DIGITAL" />
                         <label for="isu-choice6">DIGITAL</label>
                     </fieldset>
+                    -->
                     <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
                         <legend>Experience :</legend>
                         <input type="checkbox" name="exp-choice[]" id="exp-choice1" value="JUNIOR" />
@@ -84,35 +89,44 @@
                 </div>
             </form>
             
-            <div id="result_top">
-                <div class="ui-grid-a">
+            <div class="result_top">
+                <div class="ui-grid-a result_search_button">
                     <button class="ui-block-a" id="buttonSearchBack"><i class="fa fa-caret-left"></i> Back to search</button>
                     <button class="ui-block-b"><i class="fa fa-caret-down" style="float: right"></i> Sort by</button>
                 </div>
-                <div class="ui-grid-a">
-                    <div id="nav_consultant" class="ui-block-a ui-grid-b">
-                        <a class="ui-block-a" href="#"> < </a>
-                        <span class="ui-block-b"> 1/12 </span>
-                        <a class="ui-block-c" href="#"> > </a>
-                    </div>
+                <div class="ui-grid-a result_search_button">
                     <div id="nav_consultant_matches" class="ui-block-a">
                         5 matches
                     </div>
-                    <button class="ui-block-b" id="buttonDetails" data-value="details"><i class="fa fa-clone"></i> DETAILS</button>
+                    <div class="ui-block-b containing-element">
+                            <label for="flip-saveSearch" id="labelSaveSearch">Save this research</label>
+                            <select name="flip-saveSearch" id="flip-saveSearch" data-theme="b" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on"><i class="fa fa-check"></i></option>
+                            </select>
+                    </div>
+                </div>
+                <button class="buttonBackList"><i class="fa fa-caret-left" aria-hidden="true"></i>Back to list</button>
+                <div class="ui-grid-b nav_consultant">
+                        <a class="ui-block-a" href="#"> < </a>
+                        <span class="ui-block-b"> 1/12 </span>
+                        <a class="ui-block-c" href="#"> > </a>
                 </div>
             </div>
             
-            <div id="result_list">    
+            <div class="result_list">    
             </div>
             
-            <div id="result_details">    
+            <div class="result_details">    
             </div>
         
         </div>
         <div data-role="footer">
-        </div>
-        <script type="text/javascript">
-            
-        </script>
+        </div
+        
     </div>
+{% endblock %}
+
+{% block javascripts %}
+        
 {% endblock %}

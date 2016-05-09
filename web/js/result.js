@@ -1,6 +1,17 @@
 var current_consultant=1;
-var consultantsArray;
+var consultantsArray = [];
+var favoritesArray= [];
+var searchId=0;
 
+function updateFavoris(){
+    $.ajax({
+        url: "/api/favorites",
+        type: "get", //send it through get method
+        success: function(response) {
+            favoritesArray= response;
+        }
+    });
+}
 function updateConsultants(){
     $(".ui-loader").show();
     $.ajax({
@@ -8,26 +19,33 @@ function updateConsultants(){
         type: "get", //send it through get method
         data:  $("#formSearch").serialize(),
         success: function(response) {
-            //console.log(response);
-            if(response.length===0){
-                $("#result_list").html("<p>No result</p>")
-                $("#buttonDetails").unbind('click');
+            if(response.searchId){
+                searchId= response.searchId;
+                $('#flip-saveSearch').val('on').slider('refresh');
             }else{
-                consultantsArray= response;
+                $('#flip-saveSearch').val('off').slider('refresh');
+            }
+            
+            if(response.consultants.length===0){
+                $(".result_list").html("<p>No result</p>");
+            }else{
+                consultantsArray= response.consultants;
+                favoritesArray = response.favorites;
                 current_consultant=1;
                 updateConsultantsList(consultantsArray);
                 updateConsultantsDetails(consultantsArray);
                 init_swap();
                 initListButton();
             }
-            $("#nav_consultant_matches").html(response.length+" matches")
-            $("#nav_consultant_matches").show();
-            $("#nav_consultant").hide();
+            $("#nav_consultant_matches").html(consultantsArray.length+" matches")
+            $(".result_search_button").show();
+            $(".nav_consultant").hide();
+            $(".buttonBackList").hide();
             $(".ui-loader").hide();
             $("#formSearch").slideUp();
-            $("#searchTop").slideDown();
-            $("#result_top").slideDown();
-            $("#result_list").slideDown();
+            $(".searchTop").slideDown();
+            $(".result_top").slideDown();
+            $(".result_list").slideDown();
         },
         error: function(xhr) {
           //Do Something to handle error
@@ -45,7 +63,7 @@ function init_swap(){
             current_consultant++;
             $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
         }
-        $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
+        $(".nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });  
 
     $(".consultants_details").on("swiperight",function(){
@@ -57,10 +75,10 @@ function init_swap(){
             current_consultant--;
             $(this).prev().removeClass('rotate-left rotate-right').fadeIn(400);
         }
-        $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
+        $(".nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });
-    $("#nav_consultant .ui-block-a").unbind('click');
-    $("#nav_consultant .ui-block-a").on("click", function(){
+    $(".nav_consultant .ui-block-a").unbind('click');
+    $(".nav_consultant .ui-block-a").on("click", function(){
         $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-left').delay(700).fadeOut(1);
         if(current_consultant==1){
             current_consultant= consultantsArray.length;
@@ -68,10 +86,10 @@ function init_swap(){
             current_consultant--;
         }
         $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
-        $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
+        $(".nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });
-    $("#nav_consultant .ui-block-c").unbind('click');
-    $("#nav_consultant .ui-block-c").on("click", function(){
+    $(".nav_consultant .ui-block-c").unbind('click');
+    $(".nav_consultant .ui-block-c").on("click", function(){
         $('.consultants_details:nth-child('+current_consultant+')').addClass('rotate-right').delay(700).fadeOut(1);
         if(current_consultant==consultantsArray.length){
             current_consultant=1;
@@ -79,45 +97,78 @@ function init_swap(){
             current_consultant++;
         }
         $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
-        $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
+        $(".nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
     });
-    $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
+    $(".nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
 }
 
 function initListButton(){
-    $("#result_list div").on("click", function(){
+    $(".result_list div").on("click", function(){
         current_consultant= $(this).data("consultantNumber");
         $('.consultants_details').addClass('rotate-right');
         $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
-        $("#nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
-        $("#result_list").hide();
-        $("#result_details").show();
-        $("#nav_consultant").show();
-        $("#nav_consultant_matches").hide();
+        $(".nav_consultant span").html(" "+current_consultant+"/"+consultantsArray.length+" ");
+        $(".result_list").hide();
+        $(".result_details").show();
+        $(".buttonBackList").show();
+        $(".nav_consultant").show();
+        $(".result_search_button").hide();
         $(".consultants_details_bottom").show();
-        $("#buttonDetails").html("<i class='fa fa-list'></i> LIST");
-        $("#buttonDetails").data('value',"list");
     });
-    $("#buttonDetails").unbind('click');
-    $("#buttonDetails").on("click", function(){
-        if($(this).data('value')==="details"){
-            $("#result_list").hide();
-            $("#result_details").show();
-            $("#nav_consultant").show();
-            $("#nav_consultant_matches").hide();
-            $('.consultants_details:nth-child('+current_consultant+')').removeClass ('rotate-left rotate-right').fadeIn(300);
-            $('.consultants_details:nth-child('+current_consultant+')').show();
-            $(".consultants_details_bottom").show();
-            $(this).html("<i class='fa fa-list'></i> LIST");
-            $(this).data('value',"list");
+    $(".buttonBackList").unbind('click');
+    $(".buttonBackList").on("click", function(){
+        $(".buttonBackList").hide();
+        $(".nav_consultant").hide();
+        $(".result_details").hide();
+        $(".consultants_details_bottom").hide();
+        $("#nav_consultant_matches").show();
+        $(".result_list").show();
+        $(".result_search_button").show();
+    });
+    $(".favoritesSwitchButton").unbind('click');
+    $(".favoritesSwitchButton").on("click", function(){
+        var icon= $(this).find("i").get(0);
+        var consultant_id= $(this).data("consultant_id");
+        if($(icon).hasClass("fa-heart")){
+            $.ajax({
+                url: "/api/favorites/remove?consultant_id="+consultant_id,
+                type: "get", //send it through get method
+                success: function(response) {
+                    $(icon).removeClass("fa-heart").addClass("fa-heart-o");
+                }
+            });
         }else{
-            $("#nav_consultant").hide();
-            $("#result_details").hide();
-            $(".consultants_details_bottom").hide();
-            $("#nav_consultant_matches").show();
-            $("#result_list").show();
-            $(this).html("<i class='fa fa-clone'></i> DETAILS");
-            $(this).data('value',"details");
+             $.ajax({
+                url: "/api/favorites/"+consultant_id,
+                type: "put", //send it through get method
+                success: function(response) {
+                    $(icon).removeClass("fa-heart-o").addClass("fa-heart");
+                }
+            });
+        }
+        updateFavoris();
+        updateConsultantsList(consultantsArray);
+        initListButton();
+    });
+    
+    $("#flip-saveSearch").unbind('change');
+    $("#flip-saveSearch").on("change", function(){
+        if(this.value==="on"){
+            $.ajax({
+                url: "/api/search",
+                type: "put", //send it through get method
+                success: function(response) {
+                    //console.log(response);
+                }
+            });
+        }else{
+            $.ajax({
+                url: "/api/searches/"+searchId+"/remove",
+                type: "get", //send it through get method
+                success: function(response) {
+                    //console.log(response);
+                }
+            });
         }
     });
 }
@@ -131,12 +182,13 @@ function updateConsultantsList(consultants){
         var consultant="<div data-consultant-number='"+number+"'>";
         consultant+="<span>"+consultants[i].firstname+" "+consultants[i].lastname+"</span>";
         consultant+="<span>"+consultants[i].function_title+"</span>";
-        consultant+="<i class='fa fa-heart-o'></i>"
+        consultant+="<span>"+displayStatus(consultants[i])+"</span>";
+        consultant+="<i class='fa "+displayFavoriteClass(consultants[i].id)+"'></i>";
         consultant+="<span class='status_availability availability_"+getAvailabilityStatus(consultants[i])+"'></span>";
         consultant+="</div>\n";
         htmlLists+=consultant;
     }
-    $("#result_list").html(htmlLists);
+    $(".result_list").html(htmlLists);
 }
 
 function updateConsultantsDetails(consultants){
@@ -198,14 +250,22 @@ function updateConsultantsDetails(consultants){
                     consultant+=consultants[i].id;
                 consultant+="</div>\n";
                 consultant+="<div class='consultants_details_bottom ui-grid-b'>";
-                    consultant+="<a class='ui-block-a ui-btn' href='#' data-role='button'><i class='fa fa-heart-o'></i></a>";
+                    consultant+="<a class='ui-block-a ui-btn favoritesSwitchButton' href='#' data-role='button' data-consultant_id='"+consultants[i].id+"'><i class='fa "+displayFavoriteClass(consultants[i].id)+"'></i></a>";
                     consultant+="<a class='ui-block-b ui-btn' href='mailto:"+consultants[i].email+"' data-icon='email' data-role='button'><i class='fa fa-envelope-o'></i></a>";
                     consultant+="<a class='ui-block-c ui-btn' href='tel:"+consultants[i].phone+"' data-icon='phone' data-role='button'><i class='fa fa-phone'></i></a>";
                 consultant+="</div>\n";
             consultant+="</div>\n";
         htmlDetails+=consultant;
     }
-    $("#result_details").html(htmlDetails);
+    $(".result_details").html(htmlDetails);
+}
+
+function displayFavoriteClass(consultantId){
+    if($.inArray(consultantId, favoritesArray)===-1){
+        return "fa-heart-o";
+    }else{
+        return "fa-heart";
+    }
 }
 
 function displayTags(tags){
@@ -251,10 +311,7 @@ function displayLanguages(objLanguages){
     var languagesString="";
     var languagesLevels= ["UNKNOWN","BEGGINER","INTERMEDIATE","USUAL","MATERNAL"];
     for(i in objLanguages){
-        languagesString+=objLanguages[i].name+":"+languagesLevels[objLanguages[i].value];
-        if(i!=objLanguages.length-1){
-            languagesString+="/ ";
-        }
+        languagesString+= i+":"+languagesLevels[objLanguages[i]];
     }
     return languagesString;
 }

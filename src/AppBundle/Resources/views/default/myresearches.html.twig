@@ -1,0 +1,21 @@
+{% extends 'AppBundle:base.html.twig' %}
+
+{% block body %}
+    <div data-role="page" id="myresearches">
+        <div data-role="header" class="topbar">
+            <a href="#left-panel" data-icon="bars"></a>
+            <img src="/images/logoTopBar.png" alt="staff-me">
+            <a href="#" data-icon="search" id="searchTop"></a>
+        </div><!-- /header -->
+        {{ include('AppBundle:default:panelmenu.html.twig') }}
+        <div data-role="content" class="ui-content">
+            <div class="list_researches">    
+            </div>
+        </div>
+        <div data-role="footer">
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

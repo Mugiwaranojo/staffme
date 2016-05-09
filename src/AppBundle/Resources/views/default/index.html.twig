@@ -11,7 +11,14 @@
                 <img src="/images/logo_home.png" alt="staff-me">
             </div>
             <h4>Find the perfect match to your need</h4>
-            <a id="loginButton" href="/search" class="ui-btn ui-corner-all" data-theme="b" data-transition="slide">login</a>
+            <a id="loginButton" href="#" class="ui-btn ui-corner-all" data-theme="b" data-transition="slide">login</a>
+            <form action="{{ path("fos_user_security_check") }}" method="post" id="formHomeLogin">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <input id="userId" name="_username" placeholder="employee id"/>
+                <input id="userPassword" name="_password" type="password" placeholder="password"/>
+                <input id="userConfirmPassWord" name="_passwordConfirm" type="password" placeholder="confirm password"/>
+                <a id="connexionButton" href="#" class="ui-btn ui-corner-all" data-theme="b" data-transition="slide">Connexion</a>
+            </form>
         </div>
     </div>
 {% endblock %}

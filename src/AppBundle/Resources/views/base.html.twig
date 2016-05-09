@@ -12,12 +12,26 @@
             <script src="/js/jquery.js"></script>
             <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
             <script src="/js/jquery.mobile-1.4.5.min.js"></script>
-            <script src="/js/scripts.js"></script>
-            <script src="/js/result.js"></script>
+            <link rel="stylesheet" href="css/jquery.fileupload.css">
             {% block stylesheets %}{% endblock %}
 	</head>
 	<body>
             {% block body %}{% endblock %}
+            <script src="/js/result.js"></script>
+            <script src="/js/search.js"></script>
+            <script src="/js/favorites.js"></script>
+            {% if is_granted('ROLE_SUPER_ADMIN') -%}
+                <script src="js/admin.js"></script>
+                <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+                <!--<script src="js/jquery.ui.widget.js"></script>
+                <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+                <script src="js/jquery.iframe-transport.js"></script>
+                <!-- The basic File Upload plugin -->
+                <script src="js/jquery.fileupload.js"></script>
+                <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+                <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+            {%- endif %}
             {% block javascripts %}{% endblock %}
 	</body>
 </html>

@@ -1,0 +1,33 @@
+{% extends 'AppBundle:base.html.twig' %}
+
+{% block body %}
+    <div data-role="page" id="favoritespage">
+        <div data-role="header" class="topbar">
+            <a href="#left-panel" data-icon="bars"></a>
+            <img src="/images/logoTopBar.png" alt="staff-me">
+            <a href="#" data-icon="search" id="searchTop"></a>
+        </div><!-- /header -->
+        {{ include('AppBundle:default:panelmenu.html.twig') }}
+        <div data-role="content" class="ui-content">
+            <div class="result_top">
+                <button class="buttonBackList"><i class="fa fa-caret-left" aria-hidden="true"></i> Back to list</button>
+                <div class="ui-grid-b nav_consultant">
+                        <a class="ui-block-a" href="#"> < </a>
+                        <span class="ui-block-b"> 1/12 </span>
+                        <a class="ui-block-c" href="#"> > </a>
+                </div>
+            </div>
+            
+            <div class="result_list">    
+            </div>
+            
+            <div class="result_details">    
+            </div>
+        </div>
+        <div data-role="footer">
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

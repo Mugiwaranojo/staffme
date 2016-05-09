@@ -1,64 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'AppBundle:base.html.twig' %}
 
 {% block body %}
- 
-	<div class="container">
-		<span class="btn btn-success fileinput-button">
-			<i class="glyphicon glyphicon-plus"></i>
-			<span>Select files...</span>
-			<!-- The file input field used as target for the file upload widget -->
-			<input id="fileupload" type="file" name="files[]" data-url="{{ oneup_uploader_endpoint('datas') }}" multiple accept="text/csv"/>
-		</span>
-		<br>
-		<br>
-		<!-- The global progress bar -->
-		<div id="progress" class="progress">
-			<div class="progress-bar progress-bar-success"></div>
-		</div>
-		<!-- The container for the uploaded files -->
-		<div id="files" class="files"></div>
+        <div data-role="page" id="adminpage">
+        <div data-role="header" class="topbar">
+            <a href="#left-panel" data-icon="bars"></a>
+            <img src="/images/logoTopBar.png" alt="staff-me">
+            <a href="#" data-icon="search" id="searchTop"></a>
+        </div><!-- /header -->
+        {{ include('AppBundle:default:panelmenu.html.twig') }}
+        <div data-role="content" class="ui-content">
+            <h2>Administration</h2>
+            
+            <div class="allUserEditList">
+            </div>
+            
+            <button class="exportConsultantsCSV">Export <i class="fa fa-table" aria-hidden="true"></i></button>
+            <h3>Import Files</h3>
+            <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Select files...</span>
+                    <!-- The file input field used as target for the file upload widget -->
+                    <input id="fileupload" type="file" name="files[]" data-url="{{ oneup_uploader_endpoint('datas') }}" multiple accept="text/csv"/>
+            </span>
+            <br>
+            <br>
+            <!-- The global progress bar -->
+            <div id="progress" class="progress">
+                    <div class="progress-bar progress-bar-success"></div>
+            </div>
+            <!-- The container for the uploaded files -->
+            <div id="files" class="files"></div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-	<script src="js/jquery.ui.widget.js"></script>
-	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-	<script src="js/jquery.iframe-transport.js"></script>
-	<!-- The basic File Upload plugin -->
-	<script src="js/jquery.fileupload.js"></script>
-	<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	
-	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$('#fileupload').fileupload({
-			done: function (e, data) {
-				console.log(data);
-				if(!data.result.success){
-					data.result= JSON.parse(data.result);
-				}
-				$('<p/>').text(data.result.msg).appendTo('#files');
-			},
-			fail: function (e, data) {
-				console.log(data);
-				console.log(e);
-			},
-			progressall: function (e, data) {
-				var progress = parseInt(data.loaded / data.total * 100, 10);
-				$('#progress .progress-bar').css(
-					'width',
-					progress + '%'
-				);
-			}
-		}).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');;
-	});
-	</script>
+        <div data-role="footer">
+        </div>
+    </div>
 {% endblock %}
 
 {% block stylesheets %}
-	<!-- Bootstrap styles -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-	<link rel="stylesheet" href="css/jquery.fileupload.css">
 {% endblock %}

@@ -6,7 +6,7 @@ parameters:
 services:
     upload_listener:
         class: AppBundle\Event\UploadListener
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.entity_manager", "@logger"]
         tags:
             - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
 #    service_name:

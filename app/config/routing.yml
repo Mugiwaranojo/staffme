@@ -10,3 +10,6 @@ consultants:
     type:     rest
     resource: AppBundle\Controller\ConsultantApiController
     prefix:   api/
+    
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

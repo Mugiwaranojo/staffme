@@ -1,0 +1,31 @@
+{% extends 'AppBundle:base.html.twig' %}
+
+{% block body %}
+    <div id="homepage">
+        <div id="backgroundImage">
+        </div>
+
+        <div id="container">
+            <h3>Welcome to</h3>
+            <div id="logoHome">
+                <img src="/images/logo_home.png" alt="staff-me">
+            </div>
+            <h4>Find the perfect match to your need</h4>
+            <a id="loginButton" href="#" class="ui-btn ui-corner-all" data-theme="b" data-transition="slide">login</a>
+            <div id="loginPage">
+                {% for type, messages in app.session.flashBag.all %}
+                    {% for message in messages %}
+                        <div class="{{ type }}">
+                            {{ message|trans({}, 'FOSUserBundle') }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% block fos_user_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/home.js"></script>
+{% endblock %}

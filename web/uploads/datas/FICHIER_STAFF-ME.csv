@@ -1,0 +1,56 @@
+"Business Unit
+(BUs)";NOM;PRENOM;ID TCS;"DATE D'ENTREE CHEZ 
+ALTI/TCS
+";"DATE DE DEPART
+(SI DEMISSION)";"NIVEAU D'EXPERIENCE
+JUNIOR/CONFIRMED/SENIOR";Point de contact ;ACTUAL CUSTOMER;TELEPHONE NUMBER;MAIL;"NIVEAU ANGLAIS
+1:DEBUTANT
+2:INTERMEDIAIRE
+3: COURANT
+4: MATERNEL ";ROLE;"TAG PRINCIPAUX (MAX 2) 
+Séparer les mots clés par une virgule";"TAG TECHNIQUES
+Séparer les mots clés par une virgule";"TAG FONCTIONNELS
+Séparer les mots clés par une virgule";"TAGS RECENTS
+Séparer les mots clés par une virgule";"SOUHAITS
+Séparer les mots clés par une virgule";SECTEURS D'ACTIVITE;"POSITIONNEMENTS/
+COMMENTAIRES  
+(A ne pas inclure dans staff me, infos pour Joan)";"DISPONIBILITE
+1=en mission
+2=Arrêt maladie (date début + date fin)
+3=Inter-contrat (date début)
+4=en mission temps partiel (spécifier)
+5=démissionnaire (date de sortie)";"DATE PROBABLE DE 
+FIN DE MISSION";"PROLONGATION
+0=sortie/pas d'info
+1= possibilité prolongation
+2=prolongation"
+Unit2;FELJA;ADIL;789424;12/04/2010;; Confirmed ;;BENCH;06 07 48 25 59;adil.felja@tcs.com;2; IED Java ; Java ;JAVA, servlet, JSP, RMI, Struts, EJB, Hibernate, Spring, PHP, JavaScript, Selenium, Oracle, SQL SERVER, MySQL, Crystal Report, Merise, UML, Glassfish/Eclipse, Weblogic, Tomcat;;;; Banque, Secteur public ;   ;3, 09/10/12;08/10/2012;0
+Unit2;BENAKLI;Rabah;789511;08/11/2010;; Senior ;;BENCH;06 51 64 11 66 ;benakli.rabah@tcs.com;1; PM / Technical PM ; Gestion de projet ;Team Track, Mantis, MS Project, Agathone, CMMI, Scrum; Facturation, Relation client, paiement ; Salesforce ;; Assurance, Banque ;RFP GIRC;3, 01/01/13;31/12/2012;0
+Unit2;THOMAS;Laurent;789436;19/05/2010;; Senior ;;BENCH;06 82 94 78 23;laurent.thomas@tcs.com;2; CP/PMO Finance, Paiements ; Gestion de projet, Finance ;MS-project, Quality Center, CIARC +, CRISTAL; Moyens de paiement ;;; Assurance, Banque ;;3, 01/02/14;31/01/2014;0
+Unit2;BOUDAOUD;Michel;789147;09/05/2007;; Senior ;;BENCH;;michel.boudaoud@tcs.com;2; PM Insurance ; Gestion de projet ;MS Project, Planzone, PMI, Cocomo, Clarity, Agil; Dépendance, solvabilité, risques ;;; Assurance ; Mi-temps thérapeutique  ;3, 02/03/14;01/03/2014;0
+Unit2;SITBON;REBECCA;789941;25/02/2013;; Confirmed ;;BENCH;06 34 47 56 95;rebecca.sitbon@tcs.com;1; Test Senior / (Bank, Insurance) ; Test ;Oracle, SQL, ULM, Quality Center, Mantis, Testlink; Epargne, crédit ;;; Assurance, Banque ;ATAC - CNP;3, 01/01/15;31/12/2014;0
+Unit2;POIRIER;PHILIPPE;789651;01/08/2011;; Senior ;;BENCH;06 61 20 42 10;philippe.poirier@tcs.com;1; PM Infrastructure / Confirmé ; Gestion de projet, Infrastructure ;Hyper-V, Vmware, Active Directory, Microsoft Internet Security & Acceleration Server, Exchange Server;;;; Assurance, Banque, Retail ;;3, 01/05/15;30/04/2015;0
+Unit2;TAFAT;Samir;832470;30/09/2013;; Senior ;;BENCH;06 24 41 71 77;samir.tafat@tcs.com;2; PM Mainframe / PMO / Insurance/salesforce ; Gestion de projet, Mainframe ;Cobol, mvs, db2, endevor, MS Project ;; Salesforce ;; Assurance, Banque ;;3, 30/06/15;29/05/2015;0
+Unit2; CHANGALA ; Xavier ;1002530;06/10/2014;; Senior ;;BENCH;06 83 32 18 74;xavier.changala@tcs.com;2; Business Analyst / PM / Insurance/Salesforce ; MOA, gestion de projet ;BO, SQL, Base de données Oracle; Assurance-vie, Assurance maladie ; Salesforce ;; Assurance, Mutuelle ;;3, 27/06/15;26/06/2015;0
+Unit2;DOGHRAJI;SANAA;789897;10/12/2012;30/06/2016;;;BENCH;06 51 86 14 59;sanaa.doghraji@tcs.com;;AMOA BI  (MS BI, Microstrategy, Cognos)salesforce;;;;;;; Démissionnaire ;5, 30/06/16;30/06/2015;0
+Unit2;AANANOU;Nabila;789532;01/10/2011;; Confirmed ;;BENCH;06 50 81 06 29 ;nabila.aananou@tcs.com;1; BI Informatica confirmé / Insurance ; BI ;SAP BI, Oracle, BO, Informatica, Cognos;; SAP BI ;; Automobile, Assurance, Mutuelle ; En congés du 18 au 29/04/Veolia sg ;3, 11/07/15;10/07/2015;0
+Unit2;JOURDAN ;Chloé;1019349;19/01/2015;;;;BENCH;06 50 01 64 91 ;;;Test junior / Insurance;;;;;;; A ne pas positionner ;5, à définir;12/07/2015;0
+Unit2;DAM;Wisa;789504;25/10/2010;; Senior ;;BENCH;06 09 75 13 27;wisa.dam@tcs.com;1; Business Analyst / Insurance (Prévoyance, Santé) ; MOA, gestion de projet ;AVT-COLL, SAP, SQL Developer, SoapUI, JMeter, JIRA, ALM, Collector, ELGA, Siebel (CRM), SN Santé, ACTIV Infinite; Prévoyance, dommages ;;; Assurance, Mutuelle ; HSBC ;3, 16/08/15;15/08/2015;0
+Unit2;FLOUR;BERTRAND;798314;29/07/2013;;Senior;;BENCH;06 99 02 29 45;bertrand.flour@tcs.com;3;Consultant BI;BI;SAP BI, HR Access, PeopleSoft, Oracle, Talend, BO, pacbase, PL/SQL;Risque, Asset Management, Comptabilité;;;Banque, Automobile, Assurance;;3, 07/11/15;06/11/2015;0
+Unit2;GUILLAUME;Yves Marie;1040588;13/04/2015;;Senior;;BENCH;06 80 04 83 42;yvesmarie.guillaume@tcs.com;3;PM /AMOA;AMOA, gestion de projet;Graphtalk AIA, Wynsure, ALIP, MEGA;Assurance-vie, Prévoyance;;;Assurance;;3, 19/11/15;18/11/2015;0
+Unit2;REZGUI;Nadia;863033;02/12/2013;;Confirmed;;BENCH;06 88 19 94 82;nadia.rezgui@tcs.com;2;Test confirmée;Test;IBM CQTM, Quality Center, MS project, Oracle, SQL;Dépendance;;;Assurance;Cardif;3, 24/11/15;23/11/2015;0
+Unit2;YAHIAOUI;Karim;881787;10/03/2014;; Confirmed ;;BENCH;07 62 72 85 34;karim.yahiaoui@tcs.com;2; BI Datastage Confirmé / Insurance ; BI ;SQL Server, SQL, Talend, SAP BO BI, Quality Center, Oracle, Datastage, Business Objects XI, PeopleSoft; Prêts, Prévoyance, Assurance-santé ; Talend ;; Banque, Assurance, Public ;;3, 28/11/15;27/11/2015;0
+Unit2;TEBOURBI MOHAMED;YASSINE;850729;28/10/2013;;;;BENCH; 06 50 69 28 93 ;;; Test Senior / Bank, Insurance ;;;;;;;a refusé une mission chez BNP/A ne pas positionner;5, à définir;23/12/2015;0
+Unit2; EL ALAM ; Rachad ;968270;22/09/2014;; Senior ;;BENCH;06 18 27 40 34;rachad.elalam@tcs.com;2; PM / MOA / Insurance, Utilities ; MOA, gestion de projet ;MS Project, CA Clarity, Planisware; Titres, Emprunts ;;; Retail, Banque, Assurance ;;3, 01/01/16;31/12/2015;0
+Unit2;HAMMA MALIKI;Amadou;989547;13/10/2014;;Confirmed;;BENCH;06 43 88 61 98;amadou.hammamaliki@tcs.com;1;BI MS (SSIS, SSRS, SSAS) Confirmé / Insurance;BI;SQL SERVER, SSIS, SSMS, SSAS, T-SQL, Oracle, Hyperion;;;;Mutuelle, Banque, Energie, Assurance, Retail;Veolia;3, 30/01/16;29/01/2016;0
+Unit2;BUFFARD;MELIKE;789486;27/09/2010;;Confirmed;;BENCH;06 49 84 55 09;melike.buffard@tcs.com;1;Test junior/ Assistant de production;Test;Alis, Wapiti, InfoPro, SGP, CQTM, SAS;Assurance-Vie, Prévoyance, Crédit;;;Assurance, Banque, Téléphonie;CNP;3, 03/02/16;02/02/2016;0
+Unit2;TAOUNI;ALI;1002952;27/10/2015;26/07/2016;;;BENCH;06 52 44 60 70;;;Technical PM / Java / J2EE / Bank, utilities;;;;;;; Démissionnaire  ;5, 26/07/16;15/02/2016;0
+Unit2;MENAGER;MAGUETTE;789500;18/10/2010;; Senior ;;BENCH;06 65 78 07 74;maguette.menager@tcs.com;3; Test Senior /  Insurance ;Test;IBM CQTM, Alis, Quality Center, Clearquest; Assurance-Vie ;;; Assurance ; 4/5ème BNP CARDIF ;3, 16/03/16;15/03/2016;0
+Unit2;MIFTAH;Ibtissam;1019351;12/01/2015;; Junior ;;BENCH;06 95 18 30 63;ibtissam.miftah@tcs.com;3; Test Junior / Bank, Insurance ; Test ;TestLink, MBT, Quality Center ;; TestLink ;; Audit, Assurance, Retail ; Cardif ;3, 01/04/16;31/03/2016;0
+Unit2;ROBERT;Sébastien;989553;13/10/2014;; Senior ;;BENCH;06 52 78 89 77;robert.sebastien@tcs.com;2; PM Java / J2EE / Bank ; Java, J2ee ;Java 6, JSF, PrimeFaces, Hibernate, Spring Core, JUnit, Tomcat, Websphere, Webservice, Struts, Oracle,freemaker, htmt, CSS, Eclipse, Maven, Jenkins, MYSQL;;;; Assurance, Retail, Banque ; En congés jusqu'au 13/06 ;3, 01/04/16;31/03/2016;0
+Unit2;MACASSIAN;CARINE;789850;17/09/2012;;Junior;;BENCH;06 60 17 86 69;carine.macassian@tcs.com;2;Chef de projet Qualification/ Consultante MOA;Test, MOA;MS Project, Quality Center, QTP, Hyperion Essbase, BO, VBA;Contrôle de gestion;;;Assurance, Retail; SG ;3, 09/04/16;08/04/2016;0
+Unit2;EL KHARROUBI;Hajar;874211;26/02/14;;Junior;;BENCH;07 53 82 06 89;hajar.elkharroubi@tcs.com;3;Test Confirmé / Insurance, Bank;Test;Quality Center, DB2, SQL, Visual Prospect;;;;Assurance, Banque;BNP;3, 16/04/16;15/04/2016;0
+Unit2;BOISARD;Julien;883337;01/04/2014;; Senior ;;BENCH;06 73 55 56 87 ;julien.boisard@tcs.com;2; Business Analyst / PMO / Insurance ; AMOA, PMO ;Quality Center, SharePoint, Artemis Project View, MS Project, Activ Infinite, AS400, JIRA; Assurance-Vie, Prévoyance, Santé, Epargne, Souscription ;;; Assurance, Banque, Mutuelle ; NISSAN - GE ;3, 21/04/16;20/04/2016;0
+Unit2;FONTAN;DENIS;789232;18/02/2008;;Senior;;BENCH;06 31 96 10 89;denis.fontan@tcs.com;3;Technical PM / Java / J2EE / Insurance, Utilities;Java, J2ee;ALM, Jira, Clarity, eclipse, Java, J2EE, JSP, jBoss, Maven, SVN, Websphere, Struts, Hibernate, Spring, Apache;;;;Assurance, Banque, Automobile;BNP - Plasticonium - Cardif - GE;3, 24/04/16;23/04/2016;0
+Unit2;COPITET;BERTRAND;789626;06/06/2011;;Senior;;BENCH;06 86 96 49 87;bertrand.copitet@tcs.com;2;Test senior / Bank;Test;MicroStrategy, Quality Center, Run&Test, VBA Access & Excel, Datastage, Teradata SQL Assistant (TDT);Financement, Garantie;;;Assurance, Banque, Retail; BDF / bloqué en attendant le retour de BDF ;3, 25/04/16;25/04/2016;0
+Unit2;BOUCCARA;DANIEL;789016;19/07/2005;; Senior ;;BENCH;;daniel.bouccara@tcs.com;3; Marketing & SI Consultant /PM/MOA ; Gestion de projet, MOA ;XML, ASP; Cash Management, Assurance-Vie, Investissement ;;; Banque, Assurance, Automobile ;;3, 30/05/16;29/04/2016;0

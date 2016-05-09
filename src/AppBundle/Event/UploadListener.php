@@ -4,7 +4,7 @@ namespace AppBundle\Event;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Consultant;
 use Oneup\UploaderBundle\Event\PostPersistEvent ;
-
+use Psr\Log\LoggerInterface;
 
 class UploadListener
 {
@@ -12,10 +12,12 @@ class UploadListener
      * @var ObjectManager
      */
     private $om;
-
-    public function __construct(ObjectManager $om)
+    private $logger;
+    
+    public function __construct(ObjectManager $om, LoggerInterface $logger)
     {
         $this->om = $om;
+        $this->logger = $logger;
     }
 
 
@@ -63,7 +65,7 @@ class UploadListener
                         }
                         $num = count($data);
                         $dataReturn[$row]= array();
-                        for ($c=0; $c < $num && $num>=27; $c++) {
+                        for ($c=0; $c < $num ; $c++) {
                                 $dataReturn[$row][$c]= $data[$c];
                         }
                         $row++;
@@ -74,6 +76,8 @@ class UploadListener
     }
 
     private function saveConsultantsCSVDatas($datas){
+        $this->logger->info('saveConsultantsCSVDatas start');
+        $this->logger->info('saveConsultantsCSVDatas data length: '.count($datas));
         for($i=1; $i < count($datas); $i++){
             if(isset($datas[$i][3])&&intval($datas[$i][3])!=0){
                 $consultantId= intval($datas[$i][3]);
@@ -103,25 +107,20 @@ class UploadListener
         $consultant->setIsu($data[0]);
         $consultant->setRecruitement($this->convertDateTime($data[4]));
         $consultant->setSeparation($this->convertDateTime($data[5]));
-        $consultant->setFunctionTitle($data[13]);
+        $consultant->setFunctionTitle($data[12]);
         $consultant->setSkillsLevel($data[6]);
         $consultant->setManager($data[7]);
         $consultant->setPhone(str_replace(" ", "", $data[9]));
         $consultant->setEmail($data[10]);
-        $consultant->setAdresse($data[20]);
-        $consultant->setMainTag($this->convertTagToJSON($data[14]));
-        $consultant->setTechnicalTag($this->convertTagToJSON($data[15]));
-        $consultant->setFunctionalTag($this->convertTagToJSON($data[16]));
-        $consultant->setNewTag($this->convertTagToJSON($data[17]));
-        $consultant->setWishes($this->convertTagToJSON($data[18]));
-        $consultant->setActivityArea($this->convertTagToJSON($data[21]));
+        $consultant->setMainTag($this->convertTagToJSON($data[13]));
+        $consultant->setTechnicalTag($this->convertTagToJSON($data[14]));
+        $consultant->setFunctionalTag($this->convertTagToJSON($data[15]));
+        $consultant->setNewTag($this->convertTagToJSON($data[16]));
+        $consultant->setActivityArea($this->convertTagToJSON($data[18]));
         $consultant->setLanguages($this->convertLanguagesToJSON($data[11]));
-        $consultant->setTraining($this->convertTagToJSON($data[19]));
-        $consultant->setClient($data[8]);
-        $consultant->setAvailability($this->convertAvailabilityToJSON($data[23]));
-        $consultant->setMissionStart($this->convertDateTime($data[24]));
-        $consultant->setMissionEnd($this->convertDateTime($data[25]));
-        $consultant->setMissionExtension(intval($data[26]));
+        $consultant->setAvailability($this->convertAvailabilityToJSON($data[20]));
+        $consultant->setMissionEnd($this->convertDateTime($data[21]));
+        $consultant->setMissionExtension(intval($data[22]));
         $consultant->setUpdated(new \DateTime("now"));
         
     }
@@ -145,7 +144,7 @@ class UploadListener
         if(empty($value)){
             return null;
         }
-        if(preg_match('/\s*(?P<value>\d+)\s*\(*(?P<complement>[a-zA-Z0-9\/\s]+)*\)*/', $value, $matches)){
+        if(preg_match('/\s*(?P<value>\d+),\s*(?P<complement>[a-zA-Z0-9\/\s]+)/', $value, $matches)){
             if(isset($matches["complement"])){
                 return array("value"=> intval($matches["value"]),
                               "complement"=>$matches["complement"]);
@@ -161,14 +160,7 @@ class UploadListener
     
     private function convertLanguagesToJSON($value){
         $result= array();
-        $data = explode(", ", $value);
-        foreach ($data as $languageValue){
-            $tab= explode(":",  $languageValue);
-            if(count($tab)==2){
-                $result[]= array("name"=>trim($tab[0]),
-                                "value"=>intval($tab[1]));
-            }
-        }
+        $result["English"]= $value;
         return $result;
     }
 }

@@ -69,7 +69,7 @@ AppBundle\Entity\Consultant:
                 fixed: false
         adresse:
             type: text
-            nullable: false
+            nullable: true
             length: 65535
             options:
                 fixed: false

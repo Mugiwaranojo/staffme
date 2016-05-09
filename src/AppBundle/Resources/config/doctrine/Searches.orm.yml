@@ -1,0 +1,46 @@
+AppBundle\Entity\Searches:
+    type: entity
+    table: searches
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        userId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: user_id
+        name:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        query:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        isavailable:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+        updated:
+            type: datetime
+            nullable: true
+        created:
+            type: datetime
+            nullable: true
+            options:
+                default: CURRENT_TIMESTAMP
+    repositoryClass: AppBundle\Repositories\SearchesRepository
+    lifecycleCallbacks: {  }

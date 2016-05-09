@@ -1,42 +1,57 @@
 $(document).on('pageinit', function() {
-    var availableTags;
+    
+    /*$( document ).on( "swipeleft swiperight", "#searchpage", function( e ) {
+        // We check if there is no open panel on the page because otherwise
+        // a swipe to close the left panel would also open the right panel (and v.v.).
+        // We do this by checking the data that the framework stores on the page element (panel: open).
+        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+            if ( e.type === "swipeleft"  ) {
+                $( "#right-panel" ).panel( "open" );
+            } else if ( e.type === "swiperight" ) {
+                $( "#left-panel" ).panel( "open" );
+            }
+        }
+    */
     $.ajax({
         url: "/api/tags",
         type: "get", //send it through get method
         success: function(response) {
-            availableTags= response;
+            var availableTags= response;
+            $( "#inputKeywords" ).unbind("keydown");
             $( "#inputKeywords" )
             // don't navigate away from the field on tab when selecting an item
-            .bind( "keydown", function( event ) {
-              if ( event.keyCode === $.ui.keyCode.TAB &&
-                  $( this ).autocomplete( "instance" ).menu.active ) {
-                event.preventDefault();
-              }
+            .bind("keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                                    $( this ).autocomplete( "instance" ).menu.active ) {
+                          event.preventDefault();
+  
+                    }
             })
             .autocomplete({
-              minLength: 2,
-              source: function( request, response ) {
-                // delegate back to autocomplete, but extract the last term
-                response( $.ui.autocomplete.filter(
-                  availableTags, extractLast( request.term ) ) );
-              },
-              focus: function() {
-                // prevent value inserted on focus
-                return false;
-              },
-              select: function( event, ui ) {
-                var terms = split( this.value );
-                // remove the current input
-                terms.pop();
-                // add the selected item
-                terms.push( ui.item.value );
-                // add placeholder to get the comma-and-space at the end
-                terms.push( "" );
-                this.value = terms.join( ", " );
-                return false;
-              }
+                    minLength: 0,
+                    source: function( request, response ) {
+                            // delegate back to autocomplete, but extract the last term
+                            response( $.ui.autocomplete.filter(
+                                    availableTags , extractLast( request.term ) ) );
+                    },
+                    focus: function() {
+                            // prevent value inserted on focus
+                            return false;
+                    },
+                    select: function( event, ui ) {
+                            var terms = split( this.value );
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push( ui.item.value );
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push( "" );
+                            this.value = terms.join( ", " );
+                            return false;
+                    }
             });
-        }
+            $("#inputKeywords").attr('autocomplete', 'on');
+        }  
     });
     $( "#rangeAvailability-a, #rangeAvailability-b" ).unbind( "slidestop");
     $("#rangeAvailability-a, #rangeAvailability-b").bind( "slidestop", function(event) {
@@ -73,16 +88,37 @@ $(document).on('pageinit', function() {
 
     $("#buttonSearchPage, #searchTop, #buttonSearchBack").unbind("click");
     $("#buttonSearchPage, #searchTop, #buttonSearchBack").on("click", function(){
-        $("#result_top").hide();
-        $("#result_details").hide();
-        $("#result_list").hide();
-        $("#formSearch").slideDown();
-        $("#searchTop").hide();
+        backtoSearch();
     });
     
+    $(".searchTop").hide();
     
-    $("#searchTop").hide();
+    $(".buttonMenuHome").unbind("click");
+    $(".buttonMenuHome").on("click", function(){
+       backtoSearch();
+    });
+    
+    changeFormFields();
 });
+
+$( document ).on( "pageinit", "#searchpage", function( event ) {
+   
+});
+
+function split( val ) {
+    return val.split( /,\s*/ );
+}
+function extractLast( term ) {
+    return split( term ).pop();
+}
+                
+function backtoSearch(){
+    $(".result_top").hide();
+    $(".result_details").hide();
+    $(".result_list").hide();
+    $("#formSearch").slideDown();
+    $(".searchTop").hide();
+}
 
 function split( val ) {
   return val.split( /,\s*/ );
@@ -150,5 +186,38 @@ function setOnMissionSinceValue(value){
     }else{
         value= value-1;
         return "+ "+value+" years";
+    }
+}
+
+function $_GET(param) {
+	var vars = {};
+	window.location.href.replace( location.hash, '' ).replace( 
+		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+		function( m, key, value ) { // callback
+			vars[key] = value !== undefined ? value : '';
+		}
+	);
+
+	if ( param ) {
+		return vars[param] ? vars[param] : null;	
+	}
+	return vars;
+}
+
+function changeFormFields(){
+    if(window.location.href==="http://localhost/myresearches"){
+        console.log(window.location.href);
+        window.location.reload();
+    }
+    var inputs= $_GET();
+    var nbr=0;
+    for(var i in inputs){
+        if(i!="language-choice%5B0%5D"){
+            $("#"+i).val(inputs[i]);
+            nbr++;
+        }
+    }
+    if(nbr>0){
+        updateConsultants();
     }
 }

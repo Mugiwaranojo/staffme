@@ -1,0 +1,11 @@
+<div data-role="panel" id="left-panel" data-theme="b">
+    <a href="/search" data-role="button" data-mini="true" data-inline="true" data-icon="home" data-iconpos="left" class="buttonMenuHome">Home</a>
+    {% if is_granted('ROLE_SUPER_ADMIN') -%}
+         <a href="/admin" data-role="button" data-mini="true" data-inline="true" data-icon="gear" data-iconpos="left" class="buttonMenuHome">Admin</a>
+    {%- endif %}
+    <a href="/favorites" data-role="button" data-mini="true" data-inline="true" data-icon="heart" data-iconpos="left">Favorites</a>
+    <a href="/myresearches" data-role="button" data-mini="true" data-inline="true" data-icon="search" data-iconpos="left">My research</a>
+    <!--<a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="search" data-iconpos="left">My stats</a>
+    <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="search" data-iconpos="left">General stats</a>-->
+    <a href="/logout" data-role="button" data-mini="true" data-inline="true" data-icon="power" data-iconpos="left">Logout</a>
+</div><!-- /panel -->

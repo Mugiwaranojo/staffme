@@ -9,6 +9,7 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
+
 /*
 ////////////Homepage
 */
@@ -27,6 +28,31 @@
 	top:0px; 
 	left:0px;  
 	overflow:auto;
+}
+#loginPage{
+    height: auto !important;
+}
+#loginPage label{
+    display: none;
+}
+#loginPage form div:last-child{
+    display: none;
+    font-family: "Calibri";
+    font-size: 1.3em;
+    margin: 0px auto;
+    text-transform: uppercase;
+    background-color: rgb(0, 122, 195);
+    width: 55%;
+    border: none;
+    color: #FFF;
+    font-weight: lighter;
+    border-radius: 0px;
+}
+#homepage .ui-input-text{
+    height: auto;
+    width: 65%;
+    margin: 10px auto;
+    display:none;
 }
 #backgroundImage{
     position: absolute;
@@ -51,7 +77,6 @@
     -ms-transform: matrix( 0.53494392453735,0,0,0.53494392453735,0,0);
 }
 #container h4{
-    margin-top: 85px;
     font-size: 2.3em;
     font-family: "Calibri";
     color: rgb(255, 255, 255);
@@ -73,7 +98,7 @@
     padding: 22px 28px;
     height: 70px;
 }
-#loginButton{
+#loginButton, #connexionButton{
     font-family: "Calibri";
     font-size: 1.3em;
     margin: 65px;
@@ -85,6 +110,10 @@
     border-radius: 0px;
 }
 
+#connexionButton{
+    display: block;
+    margin: 25px 65px;
+}
 @media only screen and (min-width : 640px) {
     #loginButton{
         width: 30%;
@@ -108,6 +137,120 @@
     background-color: transparent;
 }
 
+/*
+////////////ADdmin page
+*/
+#progress{
+    width: 80%;
+    height: 20px;
+}
+
+#adminpage h1,h3,h4{
+    text-align: left;
+    color: buttonface;
+}
+
+.progress-bar{
+    border-radius: 15px;
+    height: 100%;
+    width: 0%;
+} 
+.progress-bar-success{
+    background: green;
+}
+
+.allUserEditList {
+    overflow: scroll;
+    width: 100%;
+    max-height: 400px;
+}
+.allUserEditList table th{
+    text-align: left;
+    text-transform: uppercase;
+    background: gray;
+    color: #fff;
+    padding: 2px;
+}
+
+.allUserEditList table td span{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    white-space: nowrap;
+}
+.allUserEditList table td input, .cancelEditConsultantButton, .validEditConsultantButton{
+    display: none;
+}
+
+.allUserEditList table td input{
+    width: 95%;
+}
+
+.allUserEditList table tr th:first-child, .allUserEditList table tr td:first-child{
+    display: inline-flex;
+    background-color: gray;
+}
+.allUserEditList table td button{
+    width: 45px;
+}
+
+.allUserEditList .consultantlist-avaibality-1{
+    background: red !important;
+}
+.allUserEditList .consultantlist-avaibality-4{
+    background: #5eb5e0 !important;
+}
+.allUserEditList .consultantlist-avaibality-2{
+    background: #000 !important;
+}
+.allUserEditList .consultantlist-avaibality-3{
+    background: greenyellow !important;
+}
+.allUserEditList .consultantlist-avaibality-5{
+    background-color: #000 !important;
+    
+}
+.allUserEditList .consultantlist-avaibality-5 span{
+    color: #fff;  
+}
+.allUserEditList .consultantlist-avaibality-6{
+    background: orange !important;
+}
+
+.exportConsultantsCSV {
+    float: right;
+    width: 20% !important;
+    background: green !important;
+    color: #fff !important;
+}
+/*
+////////////Search page
+*/
+
+#searchpage * {
+    -webkit-user-select: none;
+    -moz-user-select: none;    user-select: none;
+
+    -ms-user-select: none;
+    -o-user-select: none;
+}
+/* Arrow only buttons in the header. */
+#searchpage .ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 9px;
+}
+#searchpage .ui-header .ui-btn-inner {
+    border: none;
+}
+#left-panel a {
+    display: block;
+    text-align: left;
+    padding-left: 35px;
+    font-size: 1em;
+    border-bottom: 1px solid grey;
+}
 /*
 input.ui-slider-input {
 	display:none;
@@ -151,12 +294,30 @@ input.ui-slider-input {
 /*
 /////////////Search page
 */
-.ui-autocomplete {
-  max-height: 100px;
-  overflow-y: auto;
-  /* prevent horizontal scrollbar */
-  overflow-x: hidden;
+#inputKeywords {
+    position: relative;
+    z-index: 10000;
 }
+#clearInputKeywordsButton{
+    position: absolute;
+    right: -10px;
+    top: 28px;
+    color: black;
+    padding: 20px;
+}
+.ui-autocomplete {
+    z-index: 9999 !important;
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+a.ui-input-clear {
+    background: gray !important;
+}
+
+
 * html .ui-autocomplete {
   height: 100px;
 }
@@ -206,26 +367,21 @@ input.ui-slider-input {
 	margin-top: 50px;
 }
 #formSearch button+button{
-	margin-top: 0px;
+	margin: 10px auto;
 }
 #buttonValidSearch, #buttonValidSearch2{
     border-radius: 0px;
     border: none;
     width: 60%;
     margin: 0px auto;
+    background: gray;
 }
 #buttonMoreFilter{
     font-family: "Calibri";
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    background-color: rgb(108, 207, 246);
-    margin: 0px;
+    width: 60%;
     border: none;
-    text-align: left;
     border-radius: 0px;
     text-shadow: none;
-    padding: 20px;
 }
 
 .activeMoreFilter{
@@ -240,8 +396,8 @@ input.ui-slider-input {
 }
 #moreFilter{
     display: none;
-    border: 5px solid rgb(108, 207, 246);
     margin: 0px -15px;
+    margin-top: -10px;
     padding: 8px;
     background: #FFF;
 }
@@ -300,19 +456,37 @@ input.ui-slider-input {
 /*
 /////////////Result page
 */
-#result_top{
+.result_top{
     display: none;
     padding: 8px;
 }
 
-#result_top button{
-    background-color: rgb(0, 122, 195);
-    color: #FFF;    
+.buttonBackList{
+    display: none ;
+    width: 50% !important;
+    background: #FFF !important;
+    color: black !important;
+    text-align: center !important;
+}
+.buttonBackList i{
+    float: left;
+    margin-top: 2px;
+}
+
+.result_top button{
+    background-color: rgb(0, 122, 195) !important;
+    color: #FFF !important;    
     padding: 5px 10px;
-    border-radius: 0px;
+    border-radius: 0px !important;
     border: 1px #F9F9E7  solid;
     text-align: left;
     font-weight: lighter;
+}
+
+#labelSaveSearch{
+    float: left;
+    padding: 5px;
+    width: 60px;
 }
 
 #nav_consultant_matches{
@@ -321,62 +495,64 @@ input.ui-slider-input {
     margin-top: 8px;
 }
 
-#nav_consultant{
+.nav_consultant{
     display: none;
     text-align: center;
     margin-top: 8px;
 }
-#nav_consultant a{
+.nav_consultant a{
     text-decoration: none;
    
 }
-#nav_consultant span{
+.nav_consultant span{
     color: rgb(0, 122, 195) !important;
 }
 #buttonDetails{
     background: #FFF !important;
     color: rgb(0, 122, 195) !important;
 }
-#result_list{
+.result_list{
     display: none;
 }
-#result_list p{
+.result_list p{
     text-align: center;
 }
-#result_list div{
+.result_list div{
     text-align: left;
     background: #FFF;
     padding: 15px;
     margin: 8px;
 }
-#result_list div span{
+.result_list div span{
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
+    max-width: 280px;
+    white-space: nowrap;
     display: block;
     color: rgb(0, 122, 195) !important;
 }
 
-#result_list div span + span{
+.result_list div span + span{
     font-family: "Calibri";
     color: rgb(132, 132, 132) !important;
     padding-top: 8px;
 }
 
-#result_list div i {
+.result_list div i {
     float: right;
     margin-top: -50px;
     margin-right: 15px;
     font-size: x-large;
 }
 
-#result_list .status_availability{
+.result_list .status_availability{
     margin: 0px;
     position: absolute;
     width: 12px !important;
-    height: 79px;
+    height: 106px;
     right: 8px;
-    margin-top: -63px;
+    margin-top: -90px;
     border-radius: 0px;
 }
 
@@ -408,10 +584,10 @@ input.ui-slider-input {
     background: orange !important;
 }
 
-#result_details {
+.result_details {
   margin: auto !important;
   display: none;
-  height: 448px;
+  height: 360px;
   position: relative;
   list-style-type: none;
   padding: 10px;
@@ -424,17 +600,17 @@ input.ui-slider-input {
 } 
 
 @media only screen and (min-height : 640px) {
-    #result_details{
+    .result_details{
         height: 440px;
     }
 }
 @media only screen and (min-height : 660px) {
-    #result_details{
+    .result_details{
         height: 470px;
     }
 }
 @media only screen and (min-height : 700px) {
-    #result_details{
+    .result_details{
         height: 530px;
     }
 }
@@ -521,5 +697,25 @@ input.ui-slider-input {
 }
 
 .ui-footer{
+    display: none;
+}
+
+.user_research span{
+    float: left;
+    color: rgb(0, 122, 195) !important;
+    width: 70%;
+    text-align: left;
+}
+
+.user_research input{
+    width: 75%;
+    display: none;
+}
+.user_research button{
+    float: right;
+    color: rgb(0, 122, 195) !important;
+}
+
+.user_research .validResearchButton, .user_research .cancelResearchButton{
     display: none;
 }
